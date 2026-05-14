@@ -3,7 +3,72 @@ guid: 8559d3545cd3d75459be8cc67a5a1a90
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MI_ExtractorLumberyardItems_001
+    second: {fileID: 2100000, guid: 915c27efbcb9d8b45a663eca79156e6a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MI_ExtractorLumberyardItems_002
+    second: {fileID: 2100000, guid: 670e1c35629c2b2448ba744a08e5d5eb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MI_ExtractorLumberyardItems_003
+    second: {fileID: 2100000, guid: c6f01ddaead0fd04993bb607d1f35fa7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MI_ExtractorLumberyardLog_001
+    second: {fileID: 2100000, guid: b0778d49e457352459aafe109727f8ad, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MI_ExtractorLumberyardTable_001
+    second: {fileID: 2100000, guid: 861d2fc80e41ab54fa54004ff9d91085, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MI_ExtractorLumberyardWheel_001
+    second: {fileID: 2100000, guid: e20dea59bfa1e434d866bc91e6e8f121, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MI_ExtractorStorageFarm_001
+    second: {fileID: 2100000, guid: 4d298677099aecd4b96da2cad0b451cd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MI_Fence_002
+    second: {fileID: 2100000, guid: 8c6481b6861369241a31999e61243e28, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MI_ForgeTent_001
+    second: {fileID: 2100000, guid: 16dc65467ad364645af20799d0136c70, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MI_MerchantProps_001
+    second: {fileID: 2100000, guid: 9d39326c8dc1c6f4ab0320c36f0f68ca, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MI_VillagePropAxeOnLog_001
+    second: {fileID: 2100000, guid: 7c65be118bfea4e45b3e39be5e87d93b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MI_VillagePropBaryl_001
+    second: {fileID: 2100000, guid: 9646b8726a6cff14e86c87871a11a1e0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MI_VillagePropLogPot_001
+    second: {fileID: 2100000, guid: fab0479886be61a4693ea18a7176e27a, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
