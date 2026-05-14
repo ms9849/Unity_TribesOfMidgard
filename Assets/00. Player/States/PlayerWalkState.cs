@@ -20,8 +20,14 @@ public class PlayerWalkState : PlayerState
         }
         else
         {
-            Player.transform.Translate(Player.transform.forward *
-                Player.playerController.PlayerSpeed * Time.deltaTime);
+            Player.transform.Translate(
+                Player.transform.forward * Player.playerController.MoveInput.y *
+                Player.playerController.PlayerSpeed * Time.deltaTime + 
+                Player.transform.right * Player.playerController.MoveInput.x * 
+                Player.playerController.PlayerSpeed * Time.deltaTime
+            );
+
+            Debug.Log(Player.playerController.PlayerSpeed);
 
 
         }

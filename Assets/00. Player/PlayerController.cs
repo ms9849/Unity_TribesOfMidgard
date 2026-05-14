@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
     Transform PlayerTransform = null;
     Animator PlayerAnimator = null;
 
-    public float PlayerSpeed = 5f;
+    public float PlayerSpeed;
     public Vector2 MoveInput { get; private set; }
 
     public bool isInteracable { get; set; }
@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
         PlayerTransform = transform;
         PlayerAnimator = GetComponent<Animator>();
         isInteracable = true;
+        PlayerSpeed = 25.0f;
     }
 
     void Update()
