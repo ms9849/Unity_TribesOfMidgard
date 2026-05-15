@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     public bool isAttackKeyPressed { get; private set; }
     public bool isInteractKeyPressed { get; private set; }
     public bool isSprintKeyPressed { get; private set; }
+    public Interaction CurrentInteractionObject { get; set; }
 
     void Start()
     {

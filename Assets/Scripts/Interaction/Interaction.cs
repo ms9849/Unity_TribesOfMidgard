@@ -14,8 +14,6 @@ public class Interaction : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        Debug.Log("--- Interaction Start 실행됨 ---");
-
         InteractionUI = GetComponentInChildren<Canvas>();
         InteractionUI.transform.position = InteractionUI.transform.parent.position + Vector3.up * 2f; 
 
@@ -27,14 +25,41 @@ public class Interaction : MonoBehaviour
         InteractionText.text = InteractionData.InteractName;
         InteractionSprite.sprite = InteractionData.SpriteInfo;
 
-        Debug.Log(InteractionData.InteractorName);
-        Debug.Log(InteractionData.InteractName);
-        Debug.Log(InteractionData.SpriteInfo);
-
+        InteractionUI.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
     }
+
+    void OnTriggerEnter (Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            PlayerController player = other.GetComponent<PlayerController>();
+
+            if (player.CurrentInteractionObject != null)
+            {
+                player.CurrentInteractionObject.InteractionUI.gameObject.SetActive(false);
+            }
+
+            player.CurrentInteractionObject = this;
+            InteractionUI.gameObject.SetActive(true);
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            PlayerController player = other.GetComponent<PlayerController>();
+
+            if (player.CurrentInteractionObject == this)
+                player.CurrentInteractionObject = null;
+
+            InteractionUI.gameObject.SetActive(false);
+        }
+    }
+
 }

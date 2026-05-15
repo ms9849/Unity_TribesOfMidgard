@@ -10,9 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 7023743892114027459}
   - component: {fileID: 1942645460373472050}
+  - component: {fileID: 5090888165485501166}
   m_Layer: 0
   m_Name: Obj_Tree_Skinny
-  m_TagString: Untagged
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -46,6 +47,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Interaction
   InteractionData: {fileID: 11400000, guid: 19cb077869d207649b6727f0964265fe, type: 2}
+--- !u!54 &5090888165485501166
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8933616030356760410}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &3370040601854230889
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -104,8 +132,37 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1de29613c91fdb64798b61c072d1397f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1929775253685602184}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1de29613c91fdb64798b61c072d1397f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3846014534192607321}
   m_SourcePrefab: {fileID: 100100000, guid: 1de29613c91fdb64798b61c072d1397f, type: 3}
+--- !u!1 &2451545632706886712 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 1de29613c91fdb64798b61c072d1397f, type: 3}
+  m_PrefabInstance: {fileID: 3370040601854230889}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &3846014534192607321
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2451545632706886712}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 4, y: 5, z: 4}
+  m_Center: {x: 0, y: 3, z: 0}
 --- !u!4 &2976443324427609730 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1de29613c91fdb64798b61c072d1397f, type: 3}
