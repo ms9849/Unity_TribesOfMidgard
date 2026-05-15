@@ -20,13 +20,12 @@ public class PlayerWalkState : PlayerState
         }
         else
         {
-            Player.transform.Translate(
-                Player.transform.forward * Player.playerController.MoveInput.y *
-                Player.playerController.PlayerSpeed * Time.deltaTime + 
-                Player.transform.right * Player.playerController.MoveInput.x * 
-                Player.playerController.PlayerSpeed * Time.deltaTime
-            );
+            Player.transform.forward = new Vector3(Player.playerController.MoveInput.x, 0.0f, Player.playerController.MoveInput.y).normalized;
 
+            Player.transform.position +=
+                Player.transform.forward * Player.playerController.PlayerSpeed * Time.deltaTime;
+
+            Debug.Log(Player.transform.forward);
             Debug.Log(Player.playerController.PlayerSpeed);
 
 
