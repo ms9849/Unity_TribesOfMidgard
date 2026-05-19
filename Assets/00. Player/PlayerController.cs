@@ -8,11 +8,12 @@ public class PlayerController : MonoBehaviour
 
     public float PlayerSpeed;
     public Vector2 MoveInput { get; private set; }
-
     public bool isAttackKeyPressed { get; set; } = false;
     public bool isInteractKeyPressed { get; set; }  = false;
     public bool isSprintKeyPressed { get; set; } = false;
     public Interaction CurrentInteractionObject { get; set; } = null;
+    public PLAYER_WEAPON CurrentWeapon { get; private set; } = PLAYER_WEAPON.NAKED;
+    public bool isRootMotionEnabled { get; set; } = false;
 
     void Awake()
     {
@@ -29,6 +30,15 @@ public class PlayerController : MonoBehaviour
         
     }
 
+    public void OnAnimatorMove()
+    {
+        if (!isRootMotionEnabled)
+            return;
+
+        transform.position += PlayerAnimator.deltaPosition;
+        transform.rotation *= PlayerAnimator.deltaRotation;
+    }
+
     public void OnMove(InputAction.CallbackContext context)
     {
         MoveInput = context.ReadValue<Vector2>();
@@ -38,8 +48,6 @@ public class PlayerController : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Started)
             isAttackKeyPressed = true;
-        else
-            isAttackKeyPressed = false;
     }
 
     public void OnInteraction(InputAction.CallbackContext context)

@@ -68,6 +68,9 @@ public class PlayerStateMachine : StateMachine
                 case StateID.Collect:
                     States[(int)State] = new PlayerCollectState(this);
                     break;
+                case StateID.Attack:
+                    States[(int)State] = new PlayerSwordAttackState(this);
+                    break;
             }
         }
     }

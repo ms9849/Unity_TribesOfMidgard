@@ -1,5 +1,12 @@
 using UnityEngine;
 
+public enum PLAYER_WEAPON {
+    NAKED,
+    SWORD,
+    BOW,
+    END
+};
+
 public class Player : MonoBehaviour
 {
     public Animator playerAnimator { get; private set; }

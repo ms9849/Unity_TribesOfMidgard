@@ -31,5 +31,10 @@ public class PlayerWalkState : PlayerState
         {
             PlayerStateMachine.ChangeState(StateID.Collect);
         }
+
+        if (Player.playerController.isAttackKeyPressed)
+        {
+            PlayerStateMachine.ChangeState(StateID.Attack);
+        }
     }
 }
