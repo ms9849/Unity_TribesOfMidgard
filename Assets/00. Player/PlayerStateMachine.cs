@@ -21,29 +21,19 @@ public class PlayerStateMachine : StateMachine
     {
         StateID CurStateId = CurrentState.StateID;
 
+        if (CurStateId == NextStateID)
+            return false;
+
         return true;
-
-        //switch (NextStateID)
-        //{
-        //    case (StateID.Idle):
-        //        if (CurStateId == StateID.Idle)
-        //            return false;
-        //        return true;
-
-        //    case (StateID.Walk):
-        //        if (CurStateId == StateID.Walk)
-        //            return false;
-        //        return true;
-
-        //    default:
-        //        return false;
-        //}
     }
 
     public void ChangeState(StateID NextStateID)
     {
         if (CurrentState == null)
-            CurrentState = States[(int)NextStateID]; 
+        {
+            CurrentState = States[(int)NextStateID];
+            CurrentState.Enter();
+        }
         else
         {
             if (true == Check_TransCondition(NextStateID))
@@ -74,6 +64,9 @@ public class PlayerStateMachine : StateMachine
                     break;
                 case StateID.Walk:
                     States[(int)State] = new PlayerWalkState(this);
+                    break;
+                case StateID.Collect:
+                    States[(int)State] = new PlayerCollectState(this);
                     break;
             }
         }

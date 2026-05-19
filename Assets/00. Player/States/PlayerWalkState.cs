@@ -6,29 +6,30 @@ public class PlayerWalkState : PlayerState
 
     public override void Enter()
     {
-        Player.playerAnimator.SetBool("isWalk", true);
+        Player.playerAnimator.CrossFadeInFixedTime("Walk", 0.1f);
     }
     public override void Exit()
     {
-        Player.playerAnimator.SetBool("isWalk", false);
     }
     public override void Update()
     {
-        if (Player.playerController.MoveInput == Vector2.zero)
-        {
-            PlayerStateMachine.ChangeState(StateID.Idle);
-        }
-        else
+        if (Player.playerController.MoveInput != Vector2.zero)
         {
             Player.transform.forward = new Vector3(Player.playerController.MoveInput.x, 0.0f, Player.playerController.MoveInput.y).normalized;
 
             Player.transform.position +=
                 Player.transform.forward * Player.playerController.PlayerSpeed * Time.deltaTime;
+        }
+        else
+        {
+            PlayerStateMachine.ChangeState(StateID.Idle);
+        }
 
-            Debug.Log(Player.transform.forward);
-            Debug.Log(Player.playerController.PlayerSpeed);
-
-
+        if (Player.playerController.isInteractKeyPressed && 
+            (Player.playerController.CurrentInteractionObject.InteractionData.InteractionType == INTERACTION_TYPE.WOOD || 
+             Player.playerController.CurrentInteractionObject.InteractionData.InteractionType == INTERACTION_TYPE.STONE))
+        {
+            PlayerStateMachine.ChangeState(StateID.Collect);
         }
     }
 }

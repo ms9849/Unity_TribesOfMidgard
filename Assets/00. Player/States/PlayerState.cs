@@ -5,8 +5,7 @@ public enum StateID
     Run,
     Attack,
     WheelWind,
-    CollectWood,
-    CollectStone,
+    Collect,
     End
 }
 

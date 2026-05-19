@@ -6,28 +6,23 @@ public class PlayerIdleState : PlayerState
 
     public override void Enter()
     {
-        Player.playerAnimator.SetBool("isIdle", true);
+        Player.playerAnimator.CrossFadeInFixedTime("Idle", 0.1f);
     }
     public override void Exit()
     {
-        Player.playerAnimator.SetBool("isIdle", false);
     }
     public override void Update()
     {
-        if (Player.playerController.isAttackKeyPressed)
-        {
-            int a = 10;
-        }
-
-        if (Player.playerController.isInteractKeyPressed)
-        {
-            int b = 10;
-        }
-
-        if(Player.playerController.MoveInput != Vector2.zero)
+        if (Player.playerController.MoveInput != Vector2.zero)
         {
             PlayerStateMachine.ChangeState(StateID.Walk);
         }
 
+        if (Player.playerController.isInteractKeyPressed &&
+            (Player.playerController.CurrentInteractionObject.InteractionData.InteractionType == INTERACTION_TYPE.WOOD ||
+             Player.playerController.CurrentInteractionObject.InteractionData.InteractionType == INTERACTION_TYPE.STONE))
+        {
+            PlayerStateMachine.ChangeState(StateID.Collect);
+        }
     }
 }

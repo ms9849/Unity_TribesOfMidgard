@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        Debug.Log($"[플레이어 초기화] 인스턴스 이름: {gameObject.name} | 컨트롤러 주소: {playerController.GetHashCode()}");
     }
 
     void Update()

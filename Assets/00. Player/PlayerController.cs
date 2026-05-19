@@ -9,18 +9,19 @@ public class PlayerController : MonoBehaviour
     public float PlayerSpeed;
     public Vector2 MoveInput { get; private set; }
 
-    public bool isInteracable { get; set; }
-    public bool isAttackKeyPressed { get; private set; }
-    public bool isInteractKeyPressed { get; private set; }
-    public bool isSprintKeyPressed { get; private set; }
-    public Interaction CurrentInteractionObject { get; set; }
+    public bool isAttackKeyPressed { get; set; } = false;
+    public bool isInteractKeyPressed { get; set; }  = false;
+    public bool isSprintKeyPressed { get; set; } = false;
+    public Interaction CurrentInteractionObject { get; set; } = null;
 
-    void Start()
+    void Awake()
     {
         PlayerTransform = transform;
         PlayerAnimator = GetComponent<Animator>();
-        isInteracable = true;
-        PlayerSpeed = 25.0f;
+        PlayerSpeed = 10.0f;
+    }
+    void Start()
+    {
     }
 
     void Update()
@@ -31,7 +32,6 @@ public class PlayerController : MonoBehaviour
     public void OnMove(InputAction.CallbackContext context)
     {
         MoveInput = context.ReadValue<Vector2>();
-        Debug.Log(MoveInput);
     }
 
     public void OnAttack(InputAction.CallbackContext context)
@@ -45,12 +45,18 @@ public class PlayerController : MonoBehaviour
     public void OnInteraction(InputAction.CallbackContext context)
     {
         if (context.phase == InputActionPhase.Started)
+        {
             isInteractKeyPressed = true;
-        else
-            isInteractKeyPressed = false;
+        }
 
-        if (false == isInteracable)
+        if (null == CurrentInteractionObject)
+        {
             isInteractKeyPressed = false;
+            return;
+        }
+
+        Debug.Log("인터랙션~");
+
     }
 
     public void OnSprint(InputAction.CallbackContext context)

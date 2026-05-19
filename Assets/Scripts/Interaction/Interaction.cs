@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class Interaction : MonoBehaviour
 {
     [SerializeField]
-    private InteractionSO InteractionData;
+    public InteractionSO InteractionData;
 
     private Canvas InteractionUI;
     private Text InteractorText;
@@ -44,7 +44,11 @@ public class Interaction : MonoBehaviour
                 player.CurrentInteractionObject.InteractionUI.gameObject.SetActive(false);
             }
 
-            player.CurrentInteractionObject = this;
+            if (gameObject.activeSelf == true)
+            {
+                player.CurrentInteractionObject = this;
+            }
+
             InteractionUI.gameObject.SetActive(true);
         }
     }
