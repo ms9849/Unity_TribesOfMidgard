@@ -6,7 +6,7 @@ public class PlayerWalkState : PlayerState
 
     public override void Enter()
     {
-        Player.playerAnimator.CrossFadeInFixedTime("Walk", 0.1f);
+        Player.playerAnimator.CrossFade("Walk", 0.1f);
     }
     public override void Exit()
     {

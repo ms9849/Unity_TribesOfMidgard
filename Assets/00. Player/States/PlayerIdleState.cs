@@ -6,7 +6,8 @@ public class PlayerIdleState : PlayerState
 
     public override void Enter()
     {
-        Player.playerAnimator.CrossFadeInFixedTime("Idle", 0.25f);
+        Player.playerAnimator.CrossFadeInFixedTime("Idle", 0.3f);
+        Player.playerAnimator.Update(0f);
     }
     public override void Exit()
     {

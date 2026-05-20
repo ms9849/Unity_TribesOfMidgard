@@ -21,13 +21,15 @@ public class PlayerSwordAttackState : PlayerState
         Player.playerController.isAttackKeyPressed = false;
         Player.playerController.isRootMotionEnabled = true;
         Player.playerAnimator.Play("SwordAttack1");
+        Player.playerAnimator.Update(0f);
+
         CurrentAttackCombo = ATTACK_COMBO.FIRST;
     }
     public override void Exit()
     {
         isAnimationEnd = false;
-        Player.playerController.isAttackKeyPressed = false;
         isNextAttackReserved = false;
+        Player.playerController.isAttackKeyPressed = false;
         CurrentAttackCombo = ATTACK_COMBO.END;
         Player.playerController.isRootMotionEnabled = false;
     }
@@ -36,16 +38,107 @@ public class PlayerSwordAttackState : PlayerState
         Player.playerController.isRootMotionEnabled = true;
         AnimatorStateInfo animState = Player.playerAnimator.GetCurrentAnimatorStateInfo(0);
 
-        // 1. SwordAttack1이 '완전히' 끝났을 때 (1.0f 이상)
-        if (animState.IsName("SwordAttack1") && animState.normalizedTime >= 1.0f)
+        ReserveNextAttack();
+
+        switch (CurrentAttackCombo)
         {
-            // 100% 채웠으므로 CrossFade 대신 Play로 즉시 전환
-            Player.playerAnimator.Play("SwordAttack1End");
-        }
-        // 2. SwordAttack1End가 '완전히' 끝났을 때 (1.0f 이상)
-        else if (animState.IsName("SwordAttack1End") && animState.normalizedTime >= 1.0f)
-        {
-            PlayerStateMachine.ChangeState(StateID.Idle);
+            case ATTACK_COMBO.FIRST:
+                if ((animState.IsName("SwordAttack1End")) ||
+                    (animState.IsName("SwordAttack1") && animState.normalizedTime >= 0.7f))
+                {
+                    if (isNextAttackReserved)
+                    {
+                        CurrentAttackCombo = ATTACK_COMBO.SECOND;
+                        Player.playerAnimator.Play("SwordAttack2");
+
+
+                        isNextAttackReserved = false;
+                        isAnimationEnd = false;
+                        return;
+                    }
+                }
+
+                if (animState.IsName("SwordAttack1") && animState.normalizedTime >= 1.0f && !isAnimationEnd)
+                {
+                    Player.playerAnimator.Play("SwordAttack1End");
+                    isAnimationEnd = true;
+                }
+
+                // SwordAttack1End가 끝났을 때 
+                else if (animState.IsName("SwordAttack1End") && animState.normalizedTime >= 1.0f)
+                {
+                    PlayerStateMachine.ChangeState(StateID.Idle);
+                }
+
+                break;
+
+            case ATTACK_COMBO.SECOND:
+                if ((animState.IsName("SwordAttack2End")) ||
+                    (animState.IsName("SwordAttack2") && animState.normalizedTime >= 0.8f))
+                {
+                    if (isNextAttackReserved)
+                    {
+                        CurrentAttackCombo = ATTACK_COMBO.THIRD;
+                        Player.playerAnimator.Play("SwordAttack3");
+
+
+                        isNextAttackReserved = false;
+                        isAnimationEnd = false;
+                        return;
+                    }
+                }
+
+                // SECOND
+                if (animState.IsName("SwordAttack2") && animState.normalizedTime >= 1.0f && !isAnimationEnd)
+                {
+                    Player.playerAnimator.Play("SwordAttack2End");
+                    isAnimationEnd = true;
+                }
+                // SwordAttack1End가 끝났을 때 
+                else if (animState.IsName("SwordAttack2End") && animState.normalizedTime >= 1.0f)
+                {
+                    PlayerStateMachine.ChangeState(StateID.Idle);
+                }
+
+                break;
+
+            case ATTACK_COMBO.THIRD:
+                // THIRD
+                if (animState.IsName("SwordAttack3") && animState.normalizedTime >= 1.0f && !isAnimationEnd)
+                {
+                    Player.playerAnimator.Play("SwordAttack3End");
+                    isAnimationEnd = true;
+                }
+                // SwordAttack1End가 끝났을 때 
+                else if (animState.IsName("SwordAttack3End") && animState.normalizedTime >= 1.0f)
+                {
+                    PlayerStateMachine.ChangeState(StateID.Idle);
+                }
+
+                break; 
         }
     }
+
+    private void ReserveNextAttack()
+    {
+        AnimatorStateInfo animState = Player.playerAnimator.GetCurrentAnimatorStateInfo(0);
+
+        if (CurrentAttackCombo == ATTACK_COMBO.END || CurrentAttackCombo == ATTACK_COMBO.THIRD)
+            return;
+
+        bool isCurrentComboAnim = false;
+        if (CurrentAttackCombo == ATTACK_COMBO.FIRST && (animState.IsName("SwordAttack1") || animState.IsName("SwordAttack1End"))) isCurrentComboAnim = true;
+        if (CurrentAttackCombo == ATTACK_COMBO.SECOND && (animState.IsName("SwordAttack2") || animState.IsName("SwordAttack2End"))) isCurrentComboAnim = true;
+
+        if (!isCurrentComboAnim)
+            return;
+
+        if ((Player.playerController.isAttackKeyPressed && true == isAnimationEnd) ||
+            (Player.playerController.isAttackKeyPressed && false == isAnimationEnd && animState.normalizedTime >= 0.5f) 
+            )
+        {
+            isNextAttackReserved = true;
+            Player.playerController.isAttackKeyPressed = false;
+        }
+    }   
 }
