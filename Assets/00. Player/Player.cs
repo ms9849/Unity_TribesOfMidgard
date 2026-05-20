@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public enum PLAYER_WEAPON {
@@ -11,10 +12,16 @@ public class Player : MonoBehaviour
 {
     public Animator playerAnimator { get; private set; }
     public PlayerController playerController { get; private set; }
+    public Inventory playerInventory { get; private set; }
     PlayerStateMachine playerFSM;
-   
+
+    /*TEST CODE */
+    [Header("Test SO")]
+    public ItemSO TestWood;
+    /* ***** */
     void Awake()
     {
+        playerInventory = GetComponent<Inventory>();
         playerController = GetComponent<PlayerController>();
         playerAnimator = GetComponent<Animator>();
         playerFSM = new PlayerStateMachine(this);
@@ -22,6 +29,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        playerInventory.AddItem(TestWood, 1);
         Debug.Log($"[플레이어 초기화] 인스턴스 이름: {gameObject.name} | 컨트롤러 주소: {playerController.GetHashCode()}");
     }
 

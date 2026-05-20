@@ -5,6 +5,7 @@ public class PlayerController : MonoBehaviour
 {
     Transform PlayerTransform = null;
     Animator PlayerAnimator = null;
+    Inventory PlayerInventory = null;
 
     public float PlayerSpeed;
     public Vector2 MoveInput { get; private set; }
