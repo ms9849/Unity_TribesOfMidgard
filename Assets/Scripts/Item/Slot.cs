@@ -5,7 +5,7 @@ using System;
 public class Slot
 {
     public ItemSO Item { get; private set; }
-    int ItemCount;
+    public int ItemCount { get; private set; }
     public Action OnSlotUpdated;
 
     // 슬롯이 비어있는지 확인하는 프로퍼티
@@ -38,5 +38,6 @@ public class Slot
     {
         Item = null;
         ItemCount = 0;
+        OnSlotUpdated?.Invoke();
     }
 }

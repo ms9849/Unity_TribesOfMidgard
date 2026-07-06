@@ -7,6 +7,8 @@ public class PlayerController : MonoBehaviour
     Animator PlayerAnimator = null;
     Inventory PlayerInventory = null;
 
+    [SerializeField] private InventoryUI PlayerInventoryUI;
+
     public float PlayerSpeed;
     public Vector2 MoveInput { get; private set; }
     public bool isAttackKeyPressed { get; set; } = false;
@@ -72,7 +74,13 @@ public class PlayerController : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Performed)
             isSprintKeyPressed = true;
-        else if (context.phase == InputActionPhase.Canceled) 
+        else if (context.phase == InputActionPhase.Canceled)
             isSprintKeyPressed = false;
+    }
+
+    public void OnInventory(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started)
+            PlayerInventoryUI.ToggleActive();
     }
 }

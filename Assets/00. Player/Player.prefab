@@ -522,6 +522,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d66e6a07b2895fc41aabc516f9b830e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
+  PlayerInventoryUI: {fileID: 0}
   PlayerSpeed: 5
 --- !u!114 &6757595963241625981
 MonoBehaviour:
@@ -661,6 +662,22 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: c953ebcd-0b01-4a63-bfbf-6791c10137d0
     m_ActionName: 'Player/Sprint[/Keyboard/leftShift]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 9034213046761392752}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnInventory
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 3af8b1c2-4e9a-4b7f-8d21-5c6a9e0f1234
+    m_ActionName: 'Player/Inventory[/Keyboard/tab]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player

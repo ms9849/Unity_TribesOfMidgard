@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InventoryUI : MonoBehaviour
+// rtk 테스트용 주석
+
+public class InventoryUI : BaseUI
 {
     [Header("UI Settings")]
     public GameObject SlotPrefab;
@@ -66,7 +68,6 @@ void Start()
     //이후 이벤트에 따라 UpdateSlotUI 따로 호출.
     void Update()
     {
-
         int a = 10;
     }
 }
