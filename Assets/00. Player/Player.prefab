@@ -524,6 +524,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   PlayerInventoryUI: {fileID: 0}
   PlayerSpeed: 5
+  RotationSpeed: 0
 --- !u!114 &6757595963241625981
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -537,6 +538,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
   TestWood: {fileID: 11400000, guid: df1a5c3ae72873c469cfeb9a0f25c879, type: 2}
+  TestWeapon: {fileID: 11400000, guid: b8609ef8b269b8c478259ca2796abbbe, type: 2}
 --- !u!54 &1482168325375807811
 Rigidbody:
   m_ObjectHideFlags: 0

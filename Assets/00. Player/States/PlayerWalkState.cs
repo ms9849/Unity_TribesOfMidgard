@@ -15,7 +15,9 @@ public class PlayerWalkState : PlayerState
     {
         if (Player.playerController.MoveInput != Vector2.zero)
         {
-            Player.transform.forward = new Vector3(Player.playerController.MoveInput.x, 0.0f, Player.playerController.MoveInput.y).normalized;
+            Vector3 targetDirection = new Vector3(Player.playerController.MoveInput.x, 0.0f, Player.playerController.MoveInput.y).normalized;
+            Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
+            Player.transform.rotation = Quaternion.Slerp(Player.transform.rotation, targetRotation, Player.playerController.RotationSpeed * Time.deltaTime);
 
             Player.transform.position +=
                 Player.transform.forward * Player.playerController.PlayerSpeed * Time.deltaTime;

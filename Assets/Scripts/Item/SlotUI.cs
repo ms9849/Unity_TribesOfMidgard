@@ -5,11 +5,12 @@ using UnityEngine.EventSystems;
 using UnityEngine.Splines;
 using UnityEngine.UI;
 
-public class SlotUI : BaseUI, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
+public class SlotUI : BaseUI, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
 {
     public Inventory InventoryInfo { get; set; }
     public int Number { get; set; }
     public Image ItemImage;
+    public Image EquippedIcon;
     private Slot SlotData;
     private GameObject DragIcon;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -41,7 +42,10 @@ public class SlotUI : BaseUI, IBeginDragHandler, IDragHandler, IEndDragHandler, 
         if (SlotData != null && SlotData.Item != null)
         {
             ItemImage.sprite = SlotData.Item.ItemSprite;
-            ItemImage.color = new Color(1, 1, 1, 1); 
+            ItemImage.color = new Color(1, 1, 1, 1);
+
+            if (EquippedIcon != null)
+                EquippedIcon.enabled = SlotData.IsEquipped;
         }
         else
         {
@@ -50,10 +54,26 @@ public class SlotUI : BaseUI, IBeginDragHandler, IDragHandler, IEndDragHandler, 
                 ItemImage.sprite = null;
                 ItemImage.color = new Color(1, 1, 1, 0);
             }
+
+            if (EquippedIcon != null)
+                EquippedIcon.enabled = false;
         }
     }
 
-    // 아이템이 있는 슬롯을 드래그하기 시작할 때, 포인터를 따라다닐 아이콘을 생성합니다.
+    // 슬롯을 클릭하면 장착 가능한 아이템인지 확인 후 장착을 시도합니다.
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (SlotData == null || SlotData.IsEmpty())
+            return;
+
+        if(false == SlotData.IsEquipped)
+            InventoryInfo.EquipItemAt(Number);
+        else if(true == SlotData.IsEquipped)
+            InventoryInfo.UnEquipItemAt(Number);
+    }
+
+    // 아이템이 있는 슬롯을 드래그하기 시작할 때, 
+    // 포인터를 따라다닐 아이콘을 생성합니다.
     public void OnBeginDrag(PointerEventData eventData)
     {
         if (SlotData == null || SlotData.IsEmpty())

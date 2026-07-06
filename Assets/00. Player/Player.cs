@@ -1,13 +1,6 @@
 using Unity.VisualScripting;
 using UnityEngine;
 
-public enum PLAYER_WEAPON {
-    NAKED,
-    SWORD,
-    BOW,
-    END
-};
-
 public class Player : MonoBehaviour
 {
     public Animator playerAnimator { get; private set; }
@@ -18,6 +11,11 @@ public class Player : MonoBehaviour
     /*TEST CODE */
     [Header("Test SO")]
     public ItemSO TestWood;
+
+    /*TEST CODE */
+    [Header("WEAPON SO")]
+    public ItemSO TestWeapon;
+    
     /* ***** */
     void Awake()
     {
@@ -38,6 +36,12 @@ public class Player : MonoBehaviour
         {
             playerInventory.AddItem(TestWood, 1);
         }
+
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            playerInventory.AddItem(TestWeapon, 1);
+        }
+
 
         playerFSM.Update();
     }

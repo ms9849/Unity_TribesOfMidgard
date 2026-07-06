@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,13 +10,16 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private InventoryUI PlayerInventoryUI;
 
+    // 부위(EQUIP_TYPE)별로 현재 장착중인 장비를 관리합니다.
+    private Dictionary<EQUIP_TYPE, ItemSO> EquippedItems = new Dictionary<EQUIP_TYPE, ItemSO>();
+
     public float PlayerSpeed;
+    public float RotationSpeed;
     public Vector2 MoveInput { get; private set; }
     public bool isAttackKeyPressed { get; set; } = false;
     public bool isInteractKeyPressed { get; set; }  = false;
     public bool isSprintKeyPressed { get; set; } = false;
     public Interaction CurrentInteractionObject { get; set; } = null;
-    public PLAYER_WEAPON CurrentWeapon { get; private set; } = PLAYER_WEAPON.NAKED;
     public bool isRootMotionEnabled { get; set; } = false;
 
     void Awake()
@@ -23,6 +27,7 @@ public class PlayerController : MonoBehaviour
         PlayerTransform = transform;
         PlayerAnimator = GetComponent<Animator>();
         PlayerSpeed = 10.0f;
+        RotationSpeed = 10.0f;
     }
     void Start()
     {
@@ -49,7 +54,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnAttack(InputAction.CallbackContext context)
     {
-        if (context.phase == InputActionPhase.Started)
+        if (context.phase == InputActionPhase.Started && !PlayerInventoryUI.IsActive)
             isAttackKeyPressed = true;
     }
 
@@ -65,9 +70,6 @@ public class PlayerController : MonoBehaviour
             isInteractKeyPressed = false;
             return;
         }
-
-        Debug.Log("인터랙션~");
-
     }
 
     public void OnSprint(InputAction.CallbackContext context)
@@ -82,5 +84,28 @@ public class PlayerController : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Started)
             PlayerInventoryUI.ToggleActive();
+    }
+
+    // 해당 부위에 현재 장착중인 아이템을 반환합니다. 없으면 null.
+    public ItemSO GetEquippedItem(EQUIP_TYPE type)
+    {
+        EquippedItems.TryGetValue(type, out ItemSO item);
+        return item;
+    }
+
+    // item.EquipType 부위에 아이템을 장착하고, 기존에 장착되어 있던 아이템(없으면 null)을 반환합니다.
+    public ItemSO EquipItem(ItemSO item)
+    {
+        EquippedItems.TryGetValue(item.EquipType, out ItemSO previousItem);
+        EquippedItems[item.EquipType] = item;
+
+        return previousItem;
+    }
+
+    // item.EquipType 부위에 현재 장착중인 아이템이 item과 같을 때만 장착을 해제합니다.
+    public void UnequipItem(ItemSO item)
+    {
+        if (EquippedItems.TryGetValue(item.EquipType, out ItemSO equippedItem) && equippedItem == item)
+            EquippedItems.Remove(item.EquipType);
     }
 }
