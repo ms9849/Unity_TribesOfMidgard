@@ -29,12 +29,16 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        playerInventory.AddItem(TestWood, 1);
         Debug.Log($"[플레이어 초기화] 인스턴스 이름: {gameObject.name} | 컨트롤러 주소: {playerController.GetHashCode()}");
     }
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            playerInventory.AddItem(TestWood, 1);
+        }
+
         playerFSM.Update();
     }
 }

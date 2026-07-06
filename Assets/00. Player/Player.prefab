@@ -535,6 +535,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b376ca743068784e8f59d057df1e557, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
+  TestWood: {fileID: 11400000, guid: df1a5c3ae72873c469cfeb9a0f25c879, type: 2}
 --- !u!54 &1482168325375807811
 Rigidbody:
   m_ObjectHideFlags: 0
