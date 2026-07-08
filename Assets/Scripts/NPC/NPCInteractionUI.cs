@@ -5,7 +5,7 @@ public class NPCInteractionUI : MonoBehaviour
 {
     public static NPCInteractionUI Instance { get; private set; }
 
-    [SerializeField] private Vector3 Offset = new Vector3(0f, 2f, 0f);
+    [SerializeField] private Vector3 Offset = new Vector3(0f, 3.5f, 0f);
 
     private Text NPCNameText;
 

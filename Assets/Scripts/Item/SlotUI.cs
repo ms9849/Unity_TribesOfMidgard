@@ -11,6 +11,8 @@ public class SlotUI : BaseUI, IPointerClickHandler, IBeginDragHandler, IDragHand
     public int Number { get; set; }
     public Image ItemImage;
     public Image EquippedIcon;
+    public Text CountTextBG;
+    public Text CountText;
     private Slot SlotData;
     private GameObject DragIcon;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -46,6 +48,22 @@ public class SlotUI : BaseUI, IPointerClickHandler, IBeginDragHandler, IDragHand
 
             if (EquippedIcon != null)
                 EquippedIcon.enabled = SlotData.IsEquipped;
+
+            // 겹칠 수 있는 아이템이면 슬롯 우하단에 수량을 표시합니다.
+            bool ShowCount = SlotData.Item.IsGatherable;
+            string CountString = SlotData.ItemCount.ToString();
+
+            if (CountTextBG != null)
+            {
+                CountTextBG.enabled = ShowCount;
+                CountTextBG.text = CountString;
+            }
+
+            if (CountText != null)
+            {
+                CountText.enabled = ShowCount;
+                CountText.text = CountString;
+            }
         }
         else
         {
@@ -57,6 +75,12 @@ public class SlotUI : BaseUI, IPointerClickHandler, IBeginDragHandler, IDragHand
 
             if (EquippedIcon != null)
                 EquippedIcon.enabled = false;
+
+            if (CountTextBG != null)
+                CountTextBG.enabled = false;
+
+            if (CountText != null)
+                CountText.enabled = false;
         }
     }
 

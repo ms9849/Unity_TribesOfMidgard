@@ -37,6 +37,13 @@ public class Slot
         return true;
     }
 
+    // 겹치기 가능한 아이템의 수량을 더합니다.
+    public void AddCount(int amount)
+    {
+        ItemCount += amount;
+        OnSlotUpdated?.Invoke();
+    }
+
     // 빈 슬롯으로 초기화하는 함수
     public void ClearSlot()
     {

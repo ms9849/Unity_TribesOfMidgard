@@ -38,6 +38,19 @@ public class Inventory : MonoBehaviour
 
     public bool AddItem(ItemSO Item, int Count)
     {
+        // 겹칠 수 있는 아이템이면 같은 아이템이 있는 슬롯에 수량만 더합니다.
+        if (Item.IsGatherable)
+        {
+            for (int i = 0; i < Slots.Count; i++)
+            {
+                if (!Slots[i].IsEmpty() && Slots[i].Item == Item)
+                {
+                    Slots[i].AddCount(Count);
+                    return true;
+                }
+            }
+        }
+
         for (int i = 0; i < Slots.Count; i++)
         {
             if (Slots[i].IsEmpty())

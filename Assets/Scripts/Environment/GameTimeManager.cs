@@ -3,9 +3,9 @@ using UnityEngine;
 
 // 하루(낮+밤) 사이클의 시간 진행, 낮/밤 여부, 날짜를 관리합니다.
 // 광원 비주얼이나 몬스터 스폰 같은 다른 시스템은 이 컴포넌트를 참조/구독해서 사용합니다.
-public class GameTime : MonoBehaviour
+public class GameTimeManager : MonoBehaviour
 {
-    public static GameTime Instance { get; private set; }
+    public static GameTimeManager Instance { get; private set; }
 
     [Header("Cycle Settings")]
     [Tooltip("낮과 밤을 합친 하루 전체가 도는 데 걸리는 시간 (분)")]
@@ -14,7 +14,7 @@ public class GameTime : MonoBehaviour
 
     [Range(0f, 1f)]
     [Tooltip("현재 하루 진행도 (0 = 자정, 0.5 = 정오)")]
-    public float TimeOfDay = 0.25f;
+    public float TimeOfDay = 0.4f;
 
     [Header("Night Range")]
     [Range(0f, 1f)]
