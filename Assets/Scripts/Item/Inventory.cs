@@ -105,6 +105,44 @@ public class Inventory : MonoBehaviour
         TargetSlot.SetEquipped(false);
     }
 
+    // 인벤토리 전체에서 해당 아이템의 총 보유 수량을 셉니다.
+    public int CountItem(ItemSO Item)
+    {
+        int Total = 0;
+
+        foreach (Slot S in Slots)
+        {
+            if (!S.IsEmpty() && S.Item == Item)
+                Total += S.ItemCount;
+        }
+
+        return Total;
+    }
+
+    // 여러 슬롯에 나뉘어 있어도 지정한 수량만큼 아이템을 제거합니다. 보유 수량이 부족하면 아무것도 제거하지 않고 false를 반환합니다.
+    public bool RemoveItem(ItemSO Item, int Count)
+    {
+        if (CountItem(Item) < Count)
+            return false;
+
+        int Remaining = Count;
+
+        foreach (Slot S in Slots)
+        {
+            if (Remaining <= 0)
+                break;
+
+            if (S.IsEmpty() || S.Item != Item)
+                continue;
+
+            int RemoveFromSlot = Mathf.Min(S.ItemCount, Remaining);
+            S.RemoveCount(RemoveFromSlot);
+            Remaining -= RemoveFromSlot;
+        }
+
+        return true;
+    }
+
     // 드래그 앤 드롭으로 두 슬롯의 내용을 이동시키거나(대상이 비어있음) 교환합니다(대상에 아이템이 있음).
     public void MoveOrSwapItem(int FromIndex, int ToIndex)
     {

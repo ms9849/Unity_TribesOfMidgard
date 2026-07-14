@@ -35,4 +35,9 @@ public class PlayerState : State
     {
 
     }
+
+    public override void FixedUpdate()
+    {
+
+    }
 }

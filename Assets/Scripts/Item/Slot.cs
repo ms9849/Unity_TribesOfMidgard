@@ -44,6 +44,17 @@ public class Slot
         OnSlotUpdated?.Invoke();
     }
 
+    // 겹치기 가능한 아이템의 수량을 줄입니다. 수량이 0 이하가 되면 슬롯을 비웁니다.
+    public void RemoveCount(int amount)
+    {
+        ItemCount -= amount;
+
+        if (ItemCount <= 0)
+            ClearSlot();
+        else
+            OnSlotUpdated?.Invoke();
+    }
+
     // 빈 슬롯으로 초기화하는 함수
     public void ClearSlot()
     {

@@ -4,6 +4,6 @@ public class BlackSmith : BaseNPC
 {
     protected override void Interact()
     {
-        Debug.Log("This is Interaction Test");
+        CreateItemUI.Instance.Toggle(InteractingInventory);
     }
 }

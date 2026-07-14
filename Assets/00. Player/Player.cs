@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
     public Animator playerAnimator { get; private set; }
     public PlayerController playerController { get; private set; }
     public Inventory playerInventory { get; private set; }
+    public Rigidbody playerRigidbody { get; private set; }
     PlayerStateMachine playerFSM;
 
     /*TEST CODE */
@@ -22,6 +23,7 @@ public class Player : MonoBehaviour
         playerInventory = GetComponent<Inventory>();
         playerController = GetComponent<PlayerController>();
         playerAnimator = GetComponent<Animator>();
+        playerRigidbody = GetComponent<Rigidbody>();
         playerFSM = new PlayerStateMachine(this);
     }
 
@@ -44,5 +46,10 @@ public class Player : MonoBehaviour
 
 
         playerFSM.Update();
+    }
+
+    void FixedUpdate()
+    {
+        playerFSM.FixedUpdate();
     }
 }

@@ -53,6 +53,14 @@ public class PlayerStateMachine : StateMachine
         }
     }
 
+    public override void FixedUpdate()
+    {
+        if(CurrentState != null)
+        {
+            CurrentState.FixedUpdate();
+        }
+    }
+
     public void CreateStates()
     {
         foreach(StateID State in Enum.GetValues(typeof(StateID)))

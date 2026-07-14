@@ -7,6 +7,7 @@ public abstract class BaseNPC : MonoBehaviour
     [SerializeField] private string NPCName;
 
     private PlayerInput InteractingPlayer;
+    protected Inventory InteractingInventory;
 
     protected virtual void OnTriggerEnter(Collider other)
     {
@@ -14,6 +15,7 @@ public abstract class BaseNPC : MonoBehaviour
             return;
 
         InteractingPlayer = other.GetComponent<PlayerInput>();
+        InteractingInventory = other.GetComponent<Inventory>();
         NPCInteractionUI.Instance.Show(transform, NPCName);
     }
 
@@ -23,6 +25,7 @@ public abstract class BaseNPC : MonoBehaviour
             return;
 
         InteractingPlayer = null;
+        InteractingInventory = null;
         NPCInteractionUI.Instance.Hide();
     }
 

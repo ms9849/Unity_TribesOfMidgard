@@ -5,4 +5,5 @@ using UnityEngine;
 public abstract class StateMachine
 {
     public abstract void Update();
+    public abstract void FixedUpdate();
 }

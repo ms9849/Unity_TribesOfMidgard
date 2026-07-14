@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class InventoryUI : BaseUI
 {
+    public static InventoryUI Instance { get; private set; }
+
     [Header("UI Settings")]
     public GameObject SlotPrefab;
     public Transform SlotParent;
@@ -22,7 +24,13 @@ public class InventoryUI : BaseUI
     public Vector2 StartOffset = new Vector2(0f, 0f);
 
 
-void Start()
+protected override void Awake()
+    {
+        base.Awake();
+        Instance = this;
+    }
+
+    void Start()
     {
         SlotUIs = new List<SlotUI>();
 
