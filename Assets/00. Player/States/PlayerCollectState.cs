@@ -14,8 +14,13 @@ public class PlayerCollectState : PlayerState
         if (Player.playerController.CurrentInteractionObject.InteractionData.InteractionType == INTERACTION_TYPE.STONE)
             Player.playerAnimator.CrossFadeInFixedTime("CollectStone", 0.0f);
     }
-    public override void Exit()
+public override void Exit()
     {
+        InteractionSO Data = Player.playerController.CurrentInteractionObject.InteractionData;
+
+        if (Data.RewardItem != null)
+            Player.playerInventory.AddItem(Data.RewardItem, Data.RewardCount);
+
         Player.playerController.CurrentInteractionObject.gameObject.SetActive(false);
         Player.playerController.CurrentInteractionObject = null;
         Player.playerController.isInteractKeyPressed = false;

@@ -14,4 +14,8 @@ public class InteractionSO : ScriptableObject
     public string InteractorName;
     public Sprite SpriteInfo;
     public INTERACTION_TYPE InteractionType;
+
+    [Header("채집 보상")]
+    public ItemSO RewardItem;
+    public int RewardCount = 1;
 }

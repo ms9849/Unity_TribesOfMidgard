@@ -92,6 +92,21 @@ public class PlayerController : MonoBehaviour
             PlayerInventoryUI.ToggleActive();
     }
 
+
+    // ESC 입력 시 현재 활성화된 모든 UI(인벤토리, 제작 UI)를 비활성화합니다.
+    public void OnCancel(InputAction.CallbackContext context)
+    {
+        if (context.phase != InputActionPhase.Started)
+            return;
+
+        if (InventoryUI.Instance != null && InventoryUI.Instance.IsActive)
+            InventoryUI.Instance.SetActive(false);
+
+        if (CreateItemUI.Instance != null && CreateItemUI.Instance.IsActive)
+            CreateItemUI.Instance.SetActive(false);
+    }
+
+
     // 해당 부위에 현재 장착중인 아이템을 반환합니다. 없으면 null.
     public ItemSO GetEquippedItem(EQUIP_TYPE type)
     {

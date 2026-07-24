@@ -15,3 +15,6 @@ MonoBehaviour:
   InteractName: "\uCC44\uC9D1"
   InteractorName: "\uADF8\uB0E5 \uD3C9\uBC94\uD55C \uB098\uBB34\uC9C0\uB871"
   SpriteInfo: {fileID: 21300000, guid: d6eb48af98bdc5a48b20ad7fd3abb7d4, type: 3}
+  InteractionType: 0
+  RewardItem: {fileID: 11400000, guid: df1a5c3ae72873c469cfeb9a0f25c879, type: 2}
+  RewardCount: 1
