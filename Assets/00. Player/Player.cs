@@ -16,7 +16,10 @@ public class Player : MonoBehaviour
     /*TEST CODE */
     [Header("WEAPON SO")]
     public ItemSO TestWeapon;
-    
+
+    [Header("시작 지급 아이템")]
+    public ItemSO StartingAxe;
+
     /* ***** */
     void Awake()
     {
@@ -30,6 +33,26 @@ public class Player : MonoBehaviour
     void Start()
     {
         Debug.Log($"[플레이어 초기화] 인스턴스 이름: {gameObject.name} | 컨트롤러 주소: {playerController.GetHashCode()}");
+
+        GrantStartingAxe();
+    }
+
+    // 게임 시작 시 도끼 1개를 지급하고 바로 장착시킵니다.
+    void GrantStartingAxe()
+    {
+        if (StartingAxe == null)
+            return;
+
+        playerInventory.AddItem(StartingAxe, 1);
+
+        for (int i = 0; i < playerInventory.Slots.Count; i++)
+        {
+            if (!playerInventory.Slots[i].IsEmpty() && playerInventory.Slots[i].Item == StartingAxe)
+            {
+                playerInventory.EquipItemAt(i);
+                break;
+            }
+        }
     }
 
     void Update()

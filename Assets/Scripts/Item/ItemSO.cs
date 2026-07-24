@@ -11,4 +11,5 @@ public class ItemSO : ScriptableObject
     //이 아이템 장착 가능한가?
     public bool IsEquipable;
     public EQUIP_TYPE EquipType;    
+    public GameObject EquipModel;
 }

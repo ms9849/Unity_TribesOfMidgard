@@ -12,10 +12,7 @@ public class Inventory : MonoBehaviour
     void Awake()
     {
         PlayerController = GetComponent<PlayerController>();
-    }
 
-    void Start()
-    {
         Slots = new List<Slot>(MaxSlots);
 
         for (int i = 0; i < MaxSlots; i++)

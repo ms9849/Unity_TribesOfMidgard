@@ -523,6 +523,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   PlayerInventoryUI: {fileID: 0}
+  WeaponSocket: {fileID: 6515787425395180867}
   PlayerSpeed: 5
   RotationSpeed: 0
 --- !u!114 &6757595963241625981
@@ -539,6 +540,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Player
   TestWood: {fileID: 11400000, guid: df1a5c3ae72873c469cfeb9a0f25c879, type: 2}
   TestWeapon: {fileID: 11400000, guid: b8609ef8b269b8c478259ca2796abbbe, type: 2}
+  StartingAxe: {fileID: 11400000, guid: 531cbcde717076044942a7db81d34d72, type: 2}
 --- !u!54 &1482168325375807811
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -692,7 +694,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919132149155446097}
-  m_Material: {fileID: 13400000, guid: 8dce3ed07a6d34a4f8ec9daa8787a999, type: 2}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
