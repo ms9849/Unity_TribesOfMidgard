@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Interactable
   - UICamera
+  - Yggdrasil
+  - Monster
   layers:
   - Default
   - TransparentFX
