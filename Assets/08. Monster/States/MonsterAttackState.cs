@@ -15,7 +15,7 @@ public class MonsterAttackState : MonsterState
         Monster.monsterController.SetAttacking(false);
     }
 
-    public override void Update()
+public override void Update()
     {
         // 공격 애니메이션 재생 중에는 타겟 상실/사거리 이탈 판정을 무시하고
         // 애니메이션이 끝날 때까지 Attack 상태를 유지한다.
@@ -33,6 +33,13 @@ public class MonsterAttackState : MonsterState
         if (Monster.monsterController.IsBeyondAttackRange())
         {
             MonsterStateMachine.ChangeState(MonsterStateID.Move);
+            return;
+        }
+
+        // 사거리 안에 있어도 타겟을 바라보고 있지 않으면 회전만 하고 공격은 보류한다.
+        if (!Monster.monsterController.IsFacingTarget(Target))
+        {
+            Monster.monsterController.RotateTowardsTarget(Target);
             return;
         }
 

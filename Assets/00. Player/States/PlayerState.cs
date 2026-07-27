@@ -6,6 +6,7 @@ public enum StateID
     Attack,
     WheelWind,
     Collect,
+    Dead,
     End
 }
 

@@ -13,25 +13,49 @@ public class PlayerSwordAttackState : PlayerState
     bool isAnimationEnd = false;
     bool isNextAttackReserved = false;
     ATTACK_COMBO CurrentAttackCombo;
+    WeaponHitbox weaponHitbox;
 
     public PlayerSwordAttackState(PlayerStateMachine FSM) : base(FSM, StateID.Attack) { }
     
-    public override void Enter()
+public override void Enter()
     {
         Player.playerController.isAttackKeyPressed = false;
         Player.playerController.isRootMotionEnabled = true;
+
+        FaceMouseWorldPoint();
+
         Player.playerAnimator.Play("SwordAttack1");
         Player.playerAnimator.Update(0f);
 
         CurrentAttackCombo = ATTACK_COMBO.FIRST;
+
+        weaponHitbox = Player.playerController.GetEquippedWeaponHitbox();
+        weaponHitbox?.Arm();
     }
-    public override void Exit()
+
+    // 공격 시작 시 마우스로 피킹한 월드 좌표를 바라보도록 플레이어를 즉시 회전시킵니다.
+    private void FaceMouseWorldPoint()
+    {
+        if (!Player.playerController.TryGetMouseWorldPoint(out Vector3 worldPoint))
+            return;
+
+        Vector3 direction = worldPoint - Player.transform.position;
+        direction.y = 0f;
+
+        if (direction.sqrMagnitude < 0.0001f)
+            return;
+
+        Player.playerRigidbody.rotation = Quaternion.LookRotation(direction.normalized);
+    }
+public override void Exit()
     {
         isAnimationEnd = false;
         isNextAttackReserved = false;
         Player.playerController.isAttackKeyPressed = false;
         CurrentAttackCombo = ATTACK_COMBO.END;
         Player.playerController.isRootMotionEnabled = false;
+
+        weaponHitbox?.Disarm();
     }
     public override void Update()
     {
@@ -49,7 +73,9 @@ public class PlayerSwordAttackState : PlayerState
                     if (isNextAttackReserved)
                     {
                         CurrentAttackCombo = ATTACK_COMBO.SECOND;
+                        FaceMouseWorldPoint();
                         Player.playerAnimator.Play("SwordAttack2");
+                        weaponHitbox?.Arm();
 
 
                         isNextAttackReserved = false;
@@ -79,7 +105,9 @@ public class PlayerSwordAttackState : PlayerState
                     if (isNextAttackReserved)
                     {
                         CurrentAttackCombo = ATTACK_COMBO.THIRD;
+                        FaceMouseWorldPoint();
                         Player.playerAnimator.Play("SwordAttack3");
+                        weaponHitbox?.Arm();
 
 
                         isNextAttackReserved = false;

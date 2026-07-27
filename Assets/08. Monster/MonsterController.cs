@@ -10,6 +10,8 @@ public class MonsterController : MonoBehaviour
     [SerializeField] private float attackApproachMargin = 1f;
     [SerializeField] private float attackExitBuffer = 1f;
     [SerializeField] private float damageThresholdForTargetSwitch = 10f;
+    [SerializeField] private float facingAngleThreshold = 10f;
+    [SerializeField] private float rotationSpeed = 720f;
 
     NavMeshAgent agent;
     Health health;
@@ -86,6 +88,35 @@ public class MonsterController : MonoBehaviour
         float ExitRange = attackRange + attackExitBuffer;
         return (CurrentTarget.position - transform.position).sqrMagnitude > ExitRange * ExitRange;
     }
+
+// 타겟을 바라보고 있는지(수평 각도 기준) 여부. facingAngleThreshold 이내면 공격 가능한 것으로 본다.
+    public bool IsFacingTarget(Transform target)
+    {
+        if (target == null)
+            return false;
+
+        Vector3 DirToTarget = target.position - transform.position;
+        DirToTarget.y = 0f;
+
+        if (DirToTarget.sqrMagnitude < 0.0001f)
+            return true;
+
+        return Vector3.Angle(transform.forward, DirToTarget) <= facingAngleThreshold;
+    }
+
+    // 공격 상태에서는 NavMeshAgent의 자동 회전(updateRotation)이 꺼져있으므로, 타겟을 바라보게 직접 회전시키는 용도.
+    public void RotateTowardsTarget(Transform target)
+    {
+        Vector3 DirToTarget = target.position - transform.position;
+        DirToTarget.y = 0f;
+
+        if (DirToTarget.sqrMagnitude < 0.0001f)
+            return;
+
+        Quaternion TargetRotation = Quaternion.LookRotation(DirToTarget);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, TargetRotation, rotationSpeed * Time.deltaTime);
+    }
+
 
     public void MoveToCurrentTarget()
     {

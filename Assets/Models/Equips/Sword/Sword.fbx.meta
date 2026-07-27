@@ -3,7 +3,12 @@ guid: 041f857297e10b64786db75a3e3fc964
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MI_BaseSword_001
+    second: {fileID: 2100000, guid: ff142a9a3ba51104697852707177faf2, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

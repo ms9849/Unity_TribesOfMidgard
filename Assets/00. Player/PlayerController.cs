@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     Animator PlayerAnimator = null;
     Inventory PlayerInventory = null;
     Health PlayerHealth = null;
+    Rigidbody PlayerRigidbody = null;
 
     [SerializeField] private InventoryUI PlayerInventoryUI;
     // 무기/도끼 장착 시 실제 메쉬가 붙을 손 본(Transform). Inspector에서 직접 지정합니다.
@@ -38,6 +39,7 @@ public class PlayerController : MonoBehaviour
         PlayerTransform = transform;
         PlayerAnimator = GetComponent<Animator>();
         PlayerHealth = GetComponent<Health>();
+        PlayerRigidbody = GetComponent<Rigidbody>();
         PlayerSpeed = 10.0f;
         RotationSpeed = 10.0f;
     }
@@ -55,8 +57,8 @@ public class PlayerController : MonoBehaviour
         if (!isRootMotionEnabled)
             return;
 
-        transform.position += PlayerAnimator.deltaPosition;
-        transform.rotation *= PlayerAnimator.deltaRotation;
+        PlayerRigidbody.MovePosition(PlayerRigidbody.position + PlayerAnimator.deltaPosition);
+        PlayerRigidbody.MoveRotation(PlayerRigidbody.rotation * PlayerAnimator.deltaRotation);
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -68,6 +70,28 @@ public class PlayerController : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Started && !PlayerInventoryUI.IsActive)
             isAttackKeyPressed = true;
+    }
+
+    // 마우스 스크린 좌표를 플레이어 발밑 높이의 수평면에 투영해 월드 좌표를 구합니다.
+    // 공격 방향 판정에 사용됩니다(지형 콜라이더 유무와 무관하게 항상 값이 나옵니다).
+    public bool TryGetMouseWorldPoint(out Vector3 worldPoint)
+    {
+        worldPoint = Vector3.zero;
+
+        Camera mainCamera = Camera.main;
+        if (mainCamera == null || Mouse.current == null)
+            return false;
+
+        Ray mouseRay = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
+        Plane groundPlane = new Plane(Vector3.up, PlayerTransform.position);
+
+        if (groundPlane.Raycast(mouseRay, out float distance))
+        {
+            worldPoint = mouseRay.GetPoint(distance);
+            return true;
+        }
+
+        return false;
     }
 
     public void OnInteraction(InputAction.CallbackContext context)
@@ -149,7 +173,7 @@ public class PlayerController : MonoBehaviour
     }
 
     // item.EquipType 부위에 아이템을 장착하고, 기존에 장착되어 있던 아이템(없으면 null)을 반환합니다.
-    public ItemSO EquipItem(ItemSO item)
+public ItemSO EquipItem(ItemSO item)
     {
         EquippedItems.TryGetValue(item.EquipType, out ItemSO previousItem);
         EquippedItems[item.EquipType] = item;
@@ -157,8 +181,29 @@ public class PlayerController : MonoBehaviour
         UpdateEquipVisual(item);
         RecalculateStats();
 
+        if (item.EquipType == EQUIP_TYPE.WEAPON)
+            SetupWeaponHitbox(item);
+
         return previousItem;
     }
+
+// 무기 장착 시 비주얼에 붙은 WeaponHitbox에 공격자/데미지를 세팅합니다.
+    private void SetupWeaponHitbox(ItemSO item)
+    {
+        WeaponHitbox Hitbox = GetEquippedWeaponHitbox();
+        if (Hitbox != null)
+            Hitbox.SetOwnerAndDamage(gameObject, item.WeaponDamage);
+    }
+
+    // 현재 장착중인 무기의 WeaponHitbox를 반환합니다. 없으면 null. PlayerSwordAttackState가 Arm/Disarm 호출 시 사용합니다.
+    public WeaponHitbox GetEquippedWeaponHitbox()
+    {
+        if (EquippedVisuals.TryGetValue(EQUIP_TYPE.WEAPON, out GameObject visual) && visual != null)
+            return visual.GetComponentInChildren<WeaponHitbox>();
+
+        return null;
+    }
+
 
     // item.EquipType 부위에 현재 장착중인 아이템이 item과 같을 때만 장착을 해제합니다.
     public void UnequipItem(ItemSO item)

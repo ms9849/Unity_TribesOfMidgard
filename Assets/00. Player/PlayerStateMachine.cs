@@ -61,7 +61,7 @@ public class PlayerStateMachine : StateMachine
         }
     }
 
-    public void CreateStates()
+public void CreateStates()
     {
         foreach(StateID State in Enum.GetValues(typeof(StateID)))
         {
@@ -78,6 +78,9 @@ public class PlayerStateMachine : StateMachine
                     break;
                 case StateID.Attack:
                     States[(int)State] = new PlayerSwordAttackState(this);
+                    break;
+                case StateID.Dead:
+                    States[(int)State] = new PlayerDeadState(this);
                     break;
             }
         }

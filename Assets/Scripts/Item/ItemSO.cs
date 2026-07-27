@@ -16,4 +16,7 @@ public class ItemSO : ScriptableObject
     [Header("장착 스텟 보너스")]
     public float DefenseBonus;
     public float MaxHpBonus;
+
+    [Header("공격 스텟")]
+    public float WeaponDamage;
 }

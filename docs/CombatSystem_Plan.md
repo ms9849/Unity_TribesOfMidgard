@@ -48,19 +48,6 @@
 * 콤보 전환 지점(`SwordAttack2`, `SwordAttack3`로 `Play()` 호출하는 곳) 각각에서 다시 `Arm()` 호출 — "스윙당 1회"를 콤보 히트마다 리셋하기 위함 (안 하면 2타/3타에서 이미 맞춘 몬스터를 못 맞춤).
 * `Exit()`: `Disarm()` 호출 — 콤보가 끝나거나 취소될 때 판정 종료.
 
-### 2-5. 플레이어 사망 처리
-* `Assets/00. Player/States/PlayerState.cs`의 `StateID` enum에 `Dead` 추가 (`End` 바로 앞).
-* 신규 `PlayerDeadState.cs` (`MonsterDeadState`와 대칭 구조):
-  * `Enter()`: 이동/입력 정지(리지드바디 속도 0, 필요하면 `PlayerController`에 `IsDead` 플래그 추가해 입력 콜백 무시), 사망 애니메이션 재생.
-  * `Update()`는 오버라이드하지 않음 → base가 no-op이라 자동으로 상태가 멈춰서 Dead에서 못 빠져나감 (`MonsterDeadState`와 동일한 트릭).
-  * 게임오버 UI/리스폰 트리거는 여기서 호출 (지금 범위 밖이면 TODO 주석만 남겨도 됨).
-* `PlayerStateMachine.CreateStates()` switch에 `case StateID.Dead: States[(int)State] = new PlayerDeadState(this); break;` 추가.
-* `Player.cs`:
-  * `Health` 캐싱 추가 (`Awake()`에서 `GetComponent<Health>()`).
-  * `Start()`에서 `playerHealth.OnDeath += HandleDeath;` 구독.
-  * `HandleDeath() { playerFSM.ChangeState(StateID.Dead); }` — `Monster.cs`의 `HandleDeath`와 완전히 동일한 패턴.
-  * `OnDestroy()`에서 구독 해제.
-
 ---
 
 ## 3. 핵심 흐름 정리
@@ -71,11 +58,6 @@
 3. 스윙 중 콜라이더가 몬스터 콜라이더와 겹침 → `OnTriggerEnter`에서 `IDamageable.TakeDamage()` 호출 → 몬스터 `Health`가 데미지 처리 (`OnDamaged`/`OnDeath` 이벤트는 기존 로직 그대로 작동).
 4. 콤보 전환/상태 종료 시 → `Disarm()`.
 
-**플레이어 사망 흐름**
-1. 몬스터 공격 → 플레이어 `Health.TakeDamage()` → HP 0 → `OnDeath` 발생.
-2. `Player.HandleDeath()` → FSM `Dead` 전이.
-3. `PlayerDeadState.Enter()`가 입력 차단 + 사망 연출, 이후 상태 고착.
-
 ---
 
 ## 4. 구현 순서 제안
@@ -85,8 +67,36 @@
 4. `PlayerSwordAttackState`에 Arm/Disarm 연결 → Play 모드에서 몬스터가 실제로 맞는지 확인 (Console/`Health.OnDamaged` 로그로 검증).
 5. `StateID.Dead` + `PlayerDeadState` + `Player.cs` 구독 추가 → 몬스터 공격으로 플레이어 HP를 0까지 깎아 사망 전이 확인.
 
-## 5. 미결/추가 고려사항 (지금 범위 밖, 필요 시 별도 논의)
-* 몬스터 히트 리액션(스태거) — 이번엔 제외하기로 함.
-* 넉백, 히트스탑, 사운드/이펙트 훅(최근 추가된 사운드매니저와 연동) — 미정.
-* 도끼(AXE)로도 공격 가능하게 할지 여부 — 현재는 WEAPON만 Attack 진입 가능.
-* 플레이어 사망 후 리스폰/게임오버 UI 흐름 — `PlayerDeadState.Enter()`가 훅 지점이 될 뿐, 실제 UI/리스폰 로직은 별도 설계 필요.
+---
+
+## 5. 몬스터 공격 타입 다양화 (예: FireGiant)
+
+### 5-0. 조사 결과
+* `IMonsterAttack`(`Assets/08. Monster/Attacks/IMonsterAttack.cs`)은 `Attack(Transform target)` 한 메서드뿐인 인터페이스. `Monster.cs`가 `GetComponent<IMonsterAttack>()`로 루트 오브젝트에서 다형적으로 가져와 사용 → **몬스터 프리팹마다 다른 구현체를 붙이기만 하면 되는 구조. FSM/`Monster.cs` 수정 불필요.**
+* 기존 `MonsterMeleeAttack`은 `Attack()` 호출 즉시(애니메이션 타이밍 무관) `TakeDamage`를 호출함. FireGiant처럼 "타격 시점에 맞춰 판정"하려는 공격에는 이 패턴을 그대로 못 씀 → **새 컴포넌트로 분리, 기존 `MonsterMeleeAttack`은 건드리지 않음.**
+* `MonsterMeleeAttack`은 루트 오브젝트에 붙고 `animator = GetComponentInChildren<Animator>()`로 자식 모델의 Animator를 참조함. **Animation Event는 Animator가 붙은 그 자식 GameObject를 대상으로 SendMessage하므로, 루트의 공격 컴포넌트로 직접 이벤트를 못 보냄 → 자식 쪽에 작은 릴레이 컴포넌트 필요.**
+* FireGiant는 현재 모델/애니메이터 컨트롤러 에셋만 존재, 전투 스크립트/프리팹 세팅 없음 (새로 구성 필요).
+* 판정 방식은 즉발형(Animation Event 시점에 `OverlapSphere`/`OverlapBox` 1회 판정)으로 결정 — 지속형 콜라이더(화염 장판 등)는 지금 범위 밖.
+
+### 5-1. 신규 파일: `Assets/08. Monster/Attacks/MonsterAoeAttack.cs`
+* `MonoBehaviour, IMonsterAttack, IAnimationHitReceiver` (아래 5-3 인터페이스 구현).
+* 필드: `damage`, `attackCooldown`, `hitRadius`, `hitPoint`(Transform, 비어있으면 `transform` 사용), `targetLayer`(LayerMask, Player만 지정).
+* `Attack(Transform target)`: 쿨다운 체크 → `lastAttackTime` 갱신 → `animator.SetTrigger("Attack")`만 하고 **데미지는 주지 않음** (`MonsterMeleeAttack`과의 핵심 차이).
+* `OnAttackHit()`: `Physics.OverlapSphere(hitPoint.position, hitRadius, targetLayer)` 결과를 순회하며 `IDamageable`을 찾아 `TakeDamage(damage, gameObject)` 호출. 같은 대상이 콜라이더 여러 개로 중복 히트되지 않게 순회 중 `HashSet<IDamageable>`로 중복 제거.
+
+### 5-2. 신규 파일: `Assets/08. Monster/Attacks/IAnimationHitReceiver.cs`
+* `void OnAttackHit();` 하나만 선언. Animation Event 릴레이가 부모 쪽 공격 컴포넌트를 타입에 의존하지 않고 호출하기 위한 최소 인터페이스.
+
+### 5-3. 신규 파일: `Assets/08. Monster/Attacks/MonsterAttackAnimationRelay.cs`
+* Animator가 붙은 자식 모델 오브젝트에 부착.
+* `OnAttackHit()` (Animation Event가 호출할 이름과 동일) → `GetComponentInParent<IAnimationHitReceiver>()?.OnAttackHit()`로 전달만 함.
+
+### 5-4. 에셋 세팅 (Editor 작업, 구현 단계에서 진행)
+* FireGiant 프리팹 루트에 `MonsterController`, `Health`, `MonsterAoeAttack` 부착 (`MonsterMeleeAttack` 대신).
+* 자식 모델(Animator 소유) 오브젝트에 `MonsterAttackAnimationRelay` 부착.
+* `FireGiant_Animator.controller`의 Attack 클립에서 타격 프레임에 Animation Event 추가, 함수명 `OnAttackHit` 지정.
+* `hitPoint`는 타격 지점(손/무기 근처) 트랜스폼으로 지정, `hitRadius`/`damage`/`targetLayer` Inspector에서 조정.
+
+### 5-5. 확인 방법
+* Play 모드에서 FireGiant 공격 애니메이션 재생 중 타격 프레임에서만 플레이어가 맞는지 확인 (애니메이션 시작 즉시가 아니라).
+* `Health.OnDamaged` 로그 또는 Console로 정확히 프레임당 1회만 데미지가 들어가는지 검증 (중복 히트 없음).

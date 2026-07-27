@@ -3,7 +3,12 @@ guid: 9f2a5a859d6a0cd47ab0669f318e10af
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MI_AlvissSetChest_001
+    second: {fileID: 2100000, guid: d0235cbd345a2144b8a72ace40f52034, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

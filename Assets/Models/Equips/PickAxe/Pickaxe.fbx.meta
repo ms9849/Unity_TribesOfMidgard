@@ -3,7 +3,12 @@ guid: 7fd9a58f8005e9849afc8a1901ff0851
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MI_ToolPickAxe_001
+    second: {fileID: 2100000, guid: f367442618983ef4b8fd83ec65985a58, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

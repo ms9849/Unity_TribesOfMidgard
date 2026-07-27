@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
     public PlayerController playerController { get; private set; }
     public Inventory playerInventory { get; private set; }
     public Rigidbody playerRigidbody { get; private set; }
+    public Health playerHealth { get; private set; }
     PlayerStateMachine playerFSM;
 
     /*TEST CODE */
@@ -30,6 +31,7 @@ public class Player : MonoBehaviour
         playerController = GetComponent<PlayerController>();
         playerAnimator = GetComponent<Animator>();
         playerRigidbody = GetComponent<Rigidbody>();
+        playerHealth = GetComponent<Health>();
         playerFSM = new PlayerStateMachine(this);
     }
 
@@ -38,6 +40,8 @@ public class Player : MonoBehaviour
         Debug.Log($"[플레이어 초기화] 인스턴스 이름: {gameObject.name} | 컨트롤러 주소: {playerController.GetHashCode()}");
 
         GrantStartingAxe();
+
+        playerHealth.OnDeath += HandleDeath;
     }
 
     // 게임 시작 시 도끼 1개를 지급하고 바로 장착시킵니다.
@@ -57,6 +61,18 @@ public class Player : MonoBehaviour
             }
         }
     }
+
+void OnDestroy()
+    {
+        if (playerHealth != null)
+            playerHealth.OnDeath -= HandleDeath;
+    }
+
+    void HandleDeath()
+    {
+        playerFSM.ChangeState(StateID.Dead);
+    }
+
 
     void Update()
     {
