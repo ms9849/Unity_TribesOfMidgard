@@ -10,6 +10,10 @@ public class ItemSO : ScriptableObject
     public bool IsGatherable;
     //이 아이템 장착 가능한가?
     public bool IsEquipable;
-    public EQUIP_TYPE EquipType;    
+    public EQUIP_TYPE EquipType;
     public GameObject EquipModel;
+
+    [Header("장착 스텟 보너스")]
+    public float DefenseBonus;
+    public float MaxHpBonus;
 }

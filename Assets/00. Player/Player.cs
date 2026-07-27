@@ -17,6 +17,9 @@ public class Player : MonoBehaviour
     [Header("WEAPON SO")]
     public ItemSO TestWeapon;
 
+    [Header("Chest SO")]
+    public ItemSO TestChestArmor;
+
     [Header("시작 지급 아이템")]
     public ItemSO StartingAxe;
 
@@ -67,6 +70,10 @@ public class Player : MonoBehaviour
             playerInventory.AddItem(TestWeapon, 1);
         }
 
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            playerInventory.AddItem(TestChestArmor, 1);
+        }
 
         playerFSM.Update();
     }

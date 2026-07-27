@@ -1,3 +1,3 @@
 using UnityEngine;
 
-public enum EQUIP_TYPE { NONE, HEAD, BODY, WEAPON, AXE, PICKAXE };
+public enum EQUIP_TYPE { NONE, HEAD, CHEST, WEAPON, AXE, PICKAXE, PANTS };

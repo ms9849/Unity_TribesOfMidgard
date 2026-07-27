@@ -524,6 +524,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   PlayerInventoryUI: {fileID: 0}
   WeaponSocket: {fileID: 6515787425395180867}
+  SkeletonRoot: {fileID: 5722123244915934465}
   PlayerSpeed: 5
   RotationSpeed: 0
 --- !u!114 &6757595963241625981
@@ -540,6 +541,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Player
   TestWood: {fileID: 11400000, guid: df1a5c3ae72873c469cfeb9a0f25c879, type: 2}
   TestWeapon: {fileID: 11400000, guid: b8609ef8b269b8c478259ca2796abbbe, type: 2}
+  TestChestArmor: {fileID: 11400000, guid: 516f7d3dca2aae64fa2e07b6c60d5c31, type: 2}
   StartingAxe: {fileID: 11400000, guid: 531cbcde717076044942a7db81d34d72, type: 2}
 --- !u!54 &1482168325375807811
 Rigidbody:
@@ -693,7 +695,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument:
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: 9c1d2e3f-4a5b-4c6d-8e7f-1a2b3c4d5e6f
