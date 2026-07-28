@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     public Inventory playerInventory { get; private set; }
     public Rigidbody playerRigidbody { get; private set; }
     public Health playerHealth { get; private set; }
+    public GameObject LastAttacker { get; private set; }
     PlayerStateMachine playerFSM;
 
     /*TEST CODE */
@@ -44,6 +45,7 @@ public class Player : MonoBehaviour
         GrantStartingAxe();
 
         playerHealth.OnDeath += HandleDeath;
+        playerHealth.OnDamaged += HandleDamaged;
     }
 
     // 게임 시작 시 도끼 1개를 지급하고 바로 장착시킵니다.
@@ -67,12 +69,24 @@ public class Player : MonoBehaviour
 void OnDestroy()
     {
         if (playerHealth != null)
+        {
             playerHealth.OnDeath -= HandleDeath;
+            playerHealth.OnDamaged -= HandleDamaged;
+        }
     }
 
     void HandleDeath()
     {
         playerFSM.ChangeState(StateID.Dead);
+    }
+
+    void HandleDamaged(float amount, GameObject attacker)
+    {
+        if (playerHealth.IsAlive)
+        {
+            LastAttacker = attacker;
+            playerFSM.ChangeState(StateID.Hit);
+        }
     }
 
 

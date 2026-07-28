@@ -79,6 +79,9 @@ public void CreateStates()
                 case StateID.Attack:
                     States[(int)State] = new PlayerSwordAttackState(this);
                     break;
+                case StateID.Hit:
+                    States[(int)State] = new PlayerHitState(this);
+                    break;
                 case StateID.Dead:
                     States[(int)State] = new PlayerDeadState(this);
                     break;
