@@ -541,7 +541,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Player
   TestWood: {fileID: 11400000, guid: df1a5c3ae72873c469cfeb9a0f25c879, type: 2}
   TestWeapon: {fileID: 11400000, guid: b8609ef8b269b8c478259ca2796abbbe, type: 2}
-  TestChestArmor: {fileID: 11400000, guid: 516f7d3dca2aae64fa2e07b6c60d5c31, type: 2}
+  TestArmors:
+  - {fileID: 11400000, guid: fd8011b970134344c9cd7b1ed2141079, type: 2}
+  - {fileID: 11400000, guid: 516f7d3dca2aae64fa2e07b6c60d5c31, type: 2}
+  - {fileID: 11400000, guid: 680df2795cada2f4bbbf4f8f3e1aeedf, type: 2}
+  - {fileID: 11400000, guid: 905f32eea9a5bfd4eba9f50cddef05c2, type: 2}
+  - {fileID: 11400000, guid: 11f9c03d3de10164889bd330b43db7ae, type: 2}
   StartingAxe: {fileID: 11400000, guid: 531cbcde717076044942a7db81d34d72, type: 2}
 --- !u!54 &1482168325375807811
 Rigidbody:

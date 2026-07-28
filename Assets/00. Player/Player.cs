@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -19,7 +20,8 @@ public class Player : MonoBehaviour
     public ItemSO TestWeapon;
 
     [Header("Chest SO")]
-    public ItemSO TestChestArmor;
+    public List<ItemSO> TestArmors;
+
 
     [Header("시작 지급 아이템")]
     public ItemSO StartingAxe;
@@ -88,7 +90,10 @@ void OnDestroy()
 
         if (Input.GetKeyDown(KeyCode.H))
         {
-            playerInventory.AddItem(TestChestArmor, 1);
+            foreach(ItemSO item in TestArmors)
+            {
+                playerInventory.AddItem(item, 1);   
+            }
         }
 
         playerFSM.Update();

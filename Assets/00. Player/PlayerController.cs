@@ -276,7 +276,12 @@ public ItemSO EquipItem(ItemSO item)
     // CHEST/PANTS처럼 Player와 같은 스켈레톤을 공유하는 스킨 메쉬 장비인지 여부.
     private bool IsSkinnedEquipType(EQUIP_TYPE type)
     {
-        return type == EQUIP_TYPE.CHEST || type == EQUIP_TYPE.PANTS;
+        return 
+            type == EQUIP_TYPE.CHEST || 
+            type == EQUIP_TYPE.PANTS || 
+            type == EQUIP_TYPE.GLOVE ||
+            type == EQUIP_TYPE.HELMET ||
+            type == EQUIP_TYPE.SHOES;
     }
 
     // 갑옷 프리팹을 인스턴스화한 뒤, 프리팹이 들고 있는 자체 스켈레톤 대신 Player의 실제 스켈레톤 본으로

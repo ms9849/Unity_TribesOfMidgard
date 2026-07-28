@@ -4,6 +4,8 @@ using UnityEngine;
 [RequireComponent(typeof(Health))]
 public class Monster : MonoBehaviour
 {
+    [SerializeField] private GameObject hpUIPrefab;
+
     public MonsterController monsterController { get; private set; }
     public Health monsterHealth { get; private set; }
     public IMonsterAttack monsterAttack { get; private set; }
@@ -22,6 +24,17 @@ public class Monster : MonoBehaviour
     void Start()
     {
         monsterHealth.OnDeath += HandleDeath;
+        SpawnHPUI();
+    }
+
+    // 몬스터 머리 위에 체력바 UI를 생성하고 자신의 Health를 타겟으로 연결합니다.
+    void SpawnHPUI()
+    {
+        if (hpUIPrefab == null)
+            return;
+
+        GameObject HPUIInstance = Instantiate(hpUIPrefab, transform);
+        HPUIInstance.GetComponent<HPUI>()?.SetTarget(gameObject);
     }
 
     void OnDestroy()
