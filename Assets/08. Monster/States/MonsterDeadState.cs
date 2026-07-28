@@ -9,7 +9,11 @@ public class MonsterDeadState : MonsterState
         Monster.monsterController.StopMoving();
         Monster.monsterController.Agent.enabled = false;
 
-        // 사망 연출을 위한 유예 시간 후 제거
-        Object.Destroy(Monster.gameObject, 2f);
+        // 디졸브 연출 후 제거. FX 컴포넌트가 없으면 유예 시간 후 즉시 제거.
+        MonsterRenderFX RenderFX = Monster.GetComponent<MonsterRenderFX>();
+        if (RenderFX != null)
+            RenderFX.PlayDeathDissolve();
+        else
+            Object.Destroy(Monster.gameObject, 2f);
     }
 }
