@@ -8,7 +8,7 @@ public class TitleSceneEvent : MonoBehaviour
 
     public void OnClickStartButton()
     {
-        SceneManager.LoadScene("MainScene");
+        SceneLoader.Instance.LoadNextScene(MainSceneName);
     }
 
     public void OnClickExitButton()
