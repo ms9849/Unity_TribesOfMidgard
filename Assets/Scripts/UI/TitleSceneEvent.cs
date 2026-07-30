@@ -19,8 +19,5 @@ public class TitleSceneEvent : MonoBehaviour
 #else
         Application.Quit();
 #endif
-
     }
-
-
 }
