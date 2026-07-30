@@ -21,6 +21,7 @@ public class PlayerWalkState : PlayerState
         }
 
         if (Player.playerController.isInteractKeyPressed &&
+            Player.playerController.CurrentInteractionObject != null &&
             Player.playerController.IsAxeEquipped() &&
             (Player.playerController.CurrentInteractionObject.InteractionData.InteractionType == INTERACTION_TYPE.WOOD ||
              Player.playerController.CurrentInteractionObject.InteractionData.InteractionType == INTERACTION_TYPE.STONE))

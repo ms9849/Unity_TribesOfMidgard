@@ -16,15 +16,21 @@ public class PlayerCollectState : PlayerState
     }
 public override void Exit()
     {
-        InteractionSO Data = Player.playerController.CurrentInteractionObject.InteractionData;
+        Interaction TargetObject = Player.playerController.CurrentInteractionObject;
 
-        if (Data.RewardItem != null)
-            Player.playerInventory.AddItem(Data.RewardItem, Data.RewardCount);
+        if (TargetObject != null)
+        {
+            InteractionSO Data = TargetObject.InteractionData;
 
-        if (Data.InteractionType == INTERACTION_TYPE.WOOD)
-            Player.playerController.PlayCollectSmokeEffect(Player.playerController.CurrentInteractionObject.transform.GetChild(0).position + Vector3.up);
+            if (Data.RewardItem != null)
+                Player.playerInventory.AddItem(Data.RewardItem, Data.RewardCount);
 
-        Player.playerController.CurrentInteractionObject.gameObject.SetActive(false);
+            if (Data.InteractionType == INTERACTION_TYPE.WOOD)
+                Player.playerController.PlayCollectSmokeEffect(TargetObject.transform.GetChild(0).position + Vector3.up);
+
+            TargetObject.gameObject.SetActive(false);
+        }
+
         Player.playerController.CurrentInteractionObject = null;
         Player.playerController.isInteractKeyPressed = false;
         Player.playerController.SetActiveHandVisual(EQUIP_TYPE.WEAPON);
@@ -32,6 +38,13 @@ public override void Exit()
 
     public override void Update()
     {
+        // 채집 도중 트리거 범위를 벗어나는 등의 이유로 대상이 사라지면 즉시 Idle로 복귀합니다.
+        if (Player.playerController.CurrentInteractionObject == null)
+        {
+            PlayerStateMachine.ChangeState(StateID.Idle);
+            return;
+        }
+
         Player.transform.LookAt(new Vector3(Player.playerController.CurrentInteractionObject.transform.GetChild(0).position.x,
             0.0f,
             Player.playerController.CurrentInteractionObject.transform.GetChild(0).position.z));

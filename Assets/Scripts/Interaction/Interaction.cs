@@ -60,7 +60,10 @@ public class Interaction : MonoBehaviour
             PlayerController player = other.GetComponent<PlayerController>();
 
             if (player.CurrentInteractionObject == this)
+            {
                 player.CurrentInteractionObject = null;
+                player.isInteractKeyPressed = false;
+            }
 
             InteractionUI.gameObject.SetActive(false);
         }

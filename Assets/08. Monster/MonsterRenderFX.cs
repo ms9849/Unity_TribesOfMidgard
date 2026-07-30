@@ -7,6 +7,11 @@ public class MonsterRenderFX : MonoBehaviour
     [SerializeField] private float flashDuration = 0.15f;
     [SerializeField] private float dissolveDuration = 1.5f;
 
+    // 사망 시 재생할 이펙트 프리팹(Monster Explosion). Inspector에서 직접 지정합니다.
+    [SerializeField] private GameObject deathEffectPrefab;
+    [SerializeField] private float deathEffectLifetime = 2f;
+    [SerializeField] private float deathEffectScale = 1f;
+
     static readonly int FlashAmountID = Shader.PropertyToID("_FlashAmount");
     static readonly int DissolveAmountID = Shader.PropertyToID("_DissolveAmount");
 
@@ -52,10 +57,20 @@ public class MonsterRenderFX : MonoBehaviour
         flashRoutine = null;
     }
 
-    // 사망 연출: 디졸브를 재생한 뒤 오브젝트를 파괴합니다.
+    // 사망 연출: 디졸브가 끝난 뒤 폭발 이펙트를 재생하고 오브젝트를 파괴합니다.
     public void PlayDeathDissolve()
     {
         StartCoroutine(DissolveThenDestroyRoutine());
+    }
+
+    void PlayDeathEffect()
+    {
+        if (deathEffectPrefab == null)
+            return;
+
+        GameObject Effect = Instantiate(deathEffectPrefab, transform.position, Quaternion.identity);
+        Effect.transform.localScale = Vector3.one * deathEffectScale;
+        Destroy(Effect, deathEffectLifetime);
     }
 
     IEnumerator DissolveThenDestroyRoutine()
@@ -68,6 +83,7 @@ public class MonsterRenderFX : MonoBehaviour
             yield return null;
         }
         SetFloatOnAllRenderers(DissolveAmountID, 1f);
+        PlayDeathEffect();
         Destroy(gameObject);
     }
 
