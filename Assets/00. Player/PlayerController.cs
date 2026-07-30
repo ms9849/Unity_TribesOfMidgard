@@ -16,6 +16,13 @@ public class PlayerController : MonoBehaviour
     // 갑옷(CHEST/PANTS) 장착 시 본을 재바인딩할 기준이 되는 Player 리그의 루트. Inspector에서 직접 지정합니다.
     [SerializeField] private Transform SkeletonRoot;
 
+    // 검격 시 플레이어 정면에 스폰할 슬래시 이펙트 프리팹. Inspector에서 직접 지정합니다.
+    [SerializeField] private GameObject SlashEffectPrefab;
+    // 콤보 타(1/2/3타)별 스폰 위치/회전/수명. Inspector에서 각 타별로 다르게 조정합니다.
+    [SerializeField] private SlashEffectSettings SlashEffectFirst;
+    [SerializeField] private SlashEffectSettings SlashEffectSecond;
+    [SerializeField] private SlashEffectSettings SlashEffectThird;
+
     // 부위(EQUIP_TYPE)별로 현재 장착중인 장비를 관리합니다.
     private Dictionary<EQUIP_TYPE, ItemSO> EquippedItems = new Dictionary<EQUIP_TYPE, ItemSO>();
     // 부위(EQUIP_TYPE)별로 실제로 생성되어 붙어있는 장비 메쉬 인스턴스를 관리합니다.
@@ -204,6 +211,42 @@ public ItemSO EquipItem(ItemSO item)
         return null;
     }
 
+    // 콤보 타(combo)에 해당하는 슬래시 이펙트 설정을 반환합니다. 없으면 null.
+    private SlashEffectSettings GetSlashEffectSettings(ATTACK_COMBO combo)
+    {
+        return combo switch
+        {
+            ATTACK_COMBO.FIRST => SlashEffectFirst,
+            ATTACK_COMBO.SECOND => SlashEffectSecond,
+            ATTACK_COMBO.THIRD => SlashEffectThird,
+            _ => null
+        };
+    }
+
+    // 해당 콤보 타의 애니메이션이 이 진행도(normalizedTime)를 넘어야 슬래시 이펙트가 스폰됩니다.
+    // PlayerSwordAttackState가 Update()에서 매 프레임 체크할 때 사용합니다.
+    public float GetSlashEffectSpawnNormalizedTime(ATTACK_COMBO combo)
+    {
+        return GetSlashEffectSettings(combo)?.SpawnNormalizedTime ?? 0f;
+    }
+
+    // 플레이어 정면 고정 위치에 슬래시 이펙트를 스폰합니다. PlayerSwordAttackState가 콤보 타(combo)별로 호출합니다.
+    public void PlaySlashEffect(ATTACK_COMBO combo)
+    {
+        if (SlashEffectPrefab == null)
+            return;
+
+        SlashEffectSettings Settings = GetSlashEffectSettings(combo);
+
+        if (Settings == null)
+            return;
+
+        Vector3 SpawnPosition = PlayerTransform.position + PlayerTransform.forward * Settings.Distance + Vector3.up * Settings.Height;
+        Quaternion Rotation = PlayerTransform.rotation * Quaternion.Euler(Settings.RotationOffset);
+        GameObject Effect = Instantiate(SlashEffectPrefab, SpawnPosition, Rotation);
+        Destroy(Effect, Settings.Lifetime);
+    }
+
 
     // item.EquipType 부위에 현재 장착중인 아이템이 item과 같을 때만 장착을 해제합니다.
     public void UnequipItem(ItemSO item)
@@ -363,4 +406,16 @@ public ItemSO EquipItem(ItemSO item)
                 return null;
         }
     }
+}
+
+// 콤보 타 하나에 대한 슬래시 이펙트 스폰 위치/회전/수명 설정.
+[System.Serializable]
+public class SlashEffectSettings
+{
+    public float Distance = 1.0f;
+    public float Height = 0.0f;
+    public Vector3 RotationOffset;
+    public float Lifetime = 2.0f;
+    // 애니메이션이 이 진행도(0~1)를 넘어야 이펙트가 스폰됩니다.
+    public float SpawnNormalizedTime = 0.0f;
 }

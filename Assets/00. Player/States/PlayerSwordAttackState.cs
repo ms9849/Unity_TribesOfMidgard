@@ -12,6 +12,7 @@ public class PlayerSwordAttackState : PlayerState
 {
     bool isAnimationEnd = false;
     bool isNextAttackReserved = false;
+    bool isSlashEffectSpawned = false;
     ATTACK_COMBO CurrentAttackCombo;
     WeaponHitbox weaponHitbox;
 
@@ -28,6 +29,7 @@ public override void Enter()
         Player.playerAnimator.Update(0f);
 
         CurrentAttackCombo = ATTACK_COMBO.FIRST;
+        isSlashEffectSpawned = false;
 
         weaponHitbox = Player.playerController.GetEquippedWeaponHitbox();
         weaponHitbox?.Arm();
@@ -51,6 +53,7 @@ public override void Exit()
     {
         isAnimationEnd = false;
         isNextAttackReserved = false;
+        isSlashEffectSpawned = false;
         Player.playerController.isAttackKeyPressed = false;
         CurrentAttackCombo = ATTACK_COMBO.END;
         Player.playerController.isRootMotionEnabled = false;
@@ -64,6 +67,12 @@ public override void Exit()
 
         ReserveNextAttack();
 
+        if (!isSlashEffectSpawned && animState.normalizedTime >= Player.playerController.GetSlashEffectSpawnNormalizedTime(CurrentAttackCombo))
+        {
+            Player.playerController.PlaySlashEffect(CurrentAttackCombo);
+            isSlashEffectSpawned = true;
+        }
+
         switch (CurrentAttackCombo)
         {
             case ATTACK_COMBO.FIRST:
@@ -76,7 +85,7 @@ public override void Exit()
                         FaceMouseWorldPoint();
                         Player.playerAnimator.Play("SwordAttack2");
                         weaponHitbox?.Arm();
-
+                        isSlashEffectSpawned = false;
 
                         isNextAttackReserved = false;
                         isAnimationEnd = false;
@@ -108,7 +117,7 @@ public override void Exit()
                         FaceMouseWorldPoint();
                         Player.playerAnimator.Play("SwordAttack3");
                         weaponHitbox?.Arm();
-
+                        isSlashEffectSpawned = false;
 
                         isNextAttackReserved = false;
                         isAnimationEnd = false;
