@@ -23,6 +23,19 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private SlashEffectSettings SlashEffectSecond;
     [SerializeField] private SlashEffectSettings SlashEffectThird;
 
+    // 나무 채집 시작 시 재생할, 씬에 배치된 연기 이펙트. Inspector에서 직접 지정합니다.
+    [SerializeField] private ParticleSystem CollectSmokeEffect;
+
+    // 채집 대상 위치로 스모크 이펙트를 옮겨 재생합니다. PlayerCollectState가 나무 채집 시작 시 호출합니다.
+    public void PlayCollectSmokeEffect(Vector3 position)
+    {
+        if (CollectSmokeEffect == null)
+            return;
+
+        CollectSmokeEffect.transform.position = position;
+        CollectSmokeEffect.Play();
+    }
+
     // 부위(EQUIP_TYPE)별로 현재 장착중인 장비를 관리합니다.
     private Dictionary<EQUIP_TYPE, ItemSO> EquippedItems = new Dictionary<EQUIP_TYPE, ItemSO>();
     // 부위(EQUIP_TYPE)별로 실제로 생성되어 붙어있는 장비 메쉬 인스턴스를 관리합니다.
