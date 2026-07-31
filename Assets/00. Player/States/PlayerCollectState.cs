@@ -12,7 +12,10 @@ public class PlayerCollectState : PlayerState
         }
 
         if (Player.playerController.CurrentInteractionObject.InteractionData.InteractionType == INTERACTION_TYPE.STONE)
+        {
             Player.playerAnimator.CrossFadeInFixedTime("CollectStone", 0.0f);
+            Player.playerController.SetActiveHandVisual(EQUIP_TYPE.PICKAXE);
+        }
     }
 public override void Exit()
     {

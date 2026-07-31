@@ -5,15 +5,11 @@ public class CreateItemUI : BaseUI
 {
     public static CreateItemUI Instance { get; private set; }
 
-    [Header("Recipe")]
-    public RecipeSO Recipe;
-
-    [Header("UI References")]
-    public Image ResultIcon;
-    public Button CraftButton;
-    public GameObject MaterialSlotPrefab;
-    public Transform MaterialSlotParent;
-    public float MaterialSlotSpacing = 110f;
+    [Header("Recipe List")]
+    public RecipeSO[] Recipes;
+    public GameObject RecipeCardPrefab;
+    public Transform RecipeListParent;
+    public float RecipeCardSpacing = 240f;
 
     [Header("Repair")]
     public Button RepairButton;
@@ -32,20 +28,17 @@ public class CreateItemUI : BaseUI
 
     void Start()
     {
-        ResultIcon.sprite = Recipe.ResultItem.ItemSprite;
-
-        for (int i = 0; i < Recipe.Materials.Length; i++)
+        for (int i = 0; i < Recipes.Length; i++)
         {
-            MaterialRequirement Req = Recipe.Materials[i];
+            RecipeSO Recipe = Recipes[i];
 
-            GameObject SlotObject = Instantiate(MaterialSlotPrefab, MaterialSlotParent);
-            SlotObject.GetComponent<MaterialSlotUI>().SetData(Req.Item, Req.Count);
+            GameObject CardObject = Instantiate(RecipeCardPrefab, RecipeListParent);
+            CardObject.GetComponent<RecipeCardUI>().SetData(Recipe, () => TryCraft(Recipe));
 
-            float OffsetX = (i - (Recipe.Materials.Length - 1) / 2f) * MaterialSlotSpacing;
-            SlotObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(OffsetX, 0f);
+            float OffsetX = (i - (Recipes.Length - 1) / 2f) * RecipeCardSpacing;
+            CardObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(OffsetX, 0f);
         }
 
-        CraftButton.onClick.AddListener(TryCraft);
         RepairButton.onClick.AddListener(ToggleRepairMode);
     }
 
@@ -89,22 +82,22 @@ public class CreateItemUI : BaseUI
     }
 
     // 재료가 모두 충분할 때만 전부 소모하고 결과 아이템을 인벤토리에 추가합니다.
-    private void TryCraft()
+    private void TryCraft(RecipeSO recipe)
     {
         if (PlayerInventory == null)
             return;
 
-        foreach (MaterialRequirement Req in Recipe.Materials)
+        foreach (MaterialRequirement Req in recipe.Materials)
         {
             if (PlayerInventory.CountItem(Req.Item) < Req.Count)
                 return;
         }
 
-        foreach (MaterialRequirement Req in Recipe.Materials)
+        foreach (MaterialRequirement Req in recipe.Materials)
         {
             PlayerInventory.RemoveItem(Req.Item, Req.Count);
         }
 
-        PlayerInventory.AddItem(Recipe.ResultItem, Recipe.ResultCount);
+        PlayerInventory.AddItem(recipe.ResultItem, recipe.ResultCount);
     }
 }

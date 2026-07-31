@@ -197,6 +197,12 @@ public class PlayerController : MonoBehaviour
         return GetEquippedItem(EQUIP_TYPE.AXE) != null;
     }
 
+    // 곡괭이가 장착되어 있는지 여부. 채집 상태 진입 가능 여부 판단에 사용됩니다.
+    public bool IsPickaxeEquipped()
+    {
+        return GetEquippedItem(EQUIP_TYPE.PICKAXE) != null;
+    }
+
     // 손에 보여줄 장비를 하나만 지정합니다. 나머지 장비의 메쉬는 비활성화됩니다.
     public void SetActiveHandVisual(EQUIP_TYPE type)
     {
@@ -204,8 +210,8 @@ public class PlayerController : MonoBehaviour
 
         foreach (KeyValuePair<EQUIP_TYPE, GameObject> Pair in EquippedVisuals)
         {
-            // 손에 드는 장비(WEAPON/AXE)끼리만 서로 토글하고, 갑옷 등 다른 부위는 건드리지 않습니다.
-            if (Pair.Key != EQUIP_TYPE.WEAPON && Pair.Key != EQUIP_TYPE.AXE)
+            // 손에 드는 장비(WEAPON/AXE/PICKAXE)끼리만 서로 토글하고, 갑옷 등 다른 부위는 건드리지 않습니다.
+            if (Pair.Key != EQUIP_TYPE.WEAPON && Pair.Key != EQUIP_TYPE.AXE && Pair.Key != EQUIP_TYPE.PICKAXE)
                 continue;
 
             if (Pair.Value != null)
@@ -435,6 +441,7 @@ public ItemSO EquipItem(ItemSO item)
         {
             case EQUIP_TYPE.WEAPON:
             case EQUIP_TYPE.AXE:
+            case EQUIP_TYPE.PICKAXE:
                 return WeaponSocket;
             default:
                 return null;

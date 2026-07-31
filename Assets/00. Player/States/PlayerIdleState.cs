@@ -22,9 +22,8 @@ public class PlayerIdleState : PlayerState
 
         if (Player.playerController.isInteractKeyPressed &&
             Player.playerController.CurrentInteractionObject != null &&
-            Player.playerController.IsAxeEquipped() &&
-            (Player.playerController.CurrentInteractionObject.InteractionData.InteractionType == INTERACTION_TYPE.WOOD ||
-             Player.playerController.CurrentInteractionObject.InteractionData.InteractionType == INTERACTION_TYPE.STONE))
+            ((Player.playerController.CurrentInteractionObject.InteractionData.InteractionType == INTERACTION_TYPE.WOOD && Player.playerController.IsAxeEquipped()) ||
+             (Player.playerController.CurrentInteractionObject.InteractionData.InteractionType == INTERACTION_TYPE.STONE && Player.playerController.IsPickaxeEquipped())))
         {
             PlayerStateMachine.ChangeState(StateID.Collect);
         }

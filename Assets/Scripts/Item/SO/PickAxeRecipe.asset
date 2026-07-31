@@ -10,12 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: be20f5875c788ab42888ab4f482ac32c, type: 3}
-  m_Name: SwordRecipe
+  m_Name: PickAxeRecipe
   m_EditorClassIdentifier: Assembly-CSharp::RecipeSO
-  ResultItem: {fileID: 11400000, guid: b8609ef8b269b8c478259ca2796abbbe, type: 2}
+  ResultItem: {fileID: 11400000, guid: bbc51e116326b2b489f1a4186e9dcef9, type: 2}
   ResultCount: 1
   Materials:
   - Item: {fileID: 11400000, guid: df1a5c3ae72873c469cfeb9a0f25c879, type: 2}
     Count: 3
-  - Item: {fileID: 11400000, guid: 4f78c78ee95bc1840b458c41ce3d54fc, type: 2}
-    Count: 1
