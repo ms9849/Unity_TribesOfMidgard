@@ -88,4 +88,14 @@ public class Slot
         IsEquipped = equipped;
         OnSlotUpdated?.Invoke();
     }
+
+    // 내구도를 최대치로 채웁니다(대장장이 수리).
+    public void Repair()
+    {
+        if (Item == null)
+            return;
+
+        CurrentDurability = Item.MaxDurability;
+        OnSlotUpdated?.Invoke();
+    }
 }

@@ -112,6 +112,13 @@ public class SlotUI : BaseUI, IPointerClickHandler, IBeginDragHandler, IDragHand
         if (SlotData == null || SlotData.IsEmpty())
             return;
 
+        // 대장장이 UI가 수리 모드인 동안은 클릭 시 장착 대신 수리를 시도합니다.
+        if (CreateItemUI.Instance != null && CreateItemUI.Instance.IsRepairMode)
+        {
+            CreateItemUI.Instance.RepairSlot(SlotData);
+            return;
+        }
+
         if(false == SlotData.IsEquipped)
             InventoryInfo.EquipItemAt(Number);
         else if(true == SlotData.IsEquipped)
