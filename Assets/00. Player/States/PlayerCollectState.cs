@@ -26,7 +26,10 @@ public override void Exit()
                 Player.playerInventory.AddItem(Data.RewardItem, Data.RewardCount);
 
             if (Data.InteractionType == INTERACTION_TYPE.WOOD)
+            {
                 Player.playerController.PlayCollectSmokeEffect(TargetObject.transform.GetChild(0).position + Vector3.up);
+                Player.playerInventory.DamageEquippedItem(EQUIP_TYPE.AXE, 5);
+            }
 
             TargetObject.gameObject.SetActive(false);
         }

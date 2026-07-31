@@ -13,6 +13,9 @@ public class ItemSO : ScriptableObject
     public EQUIP_TYPE EquipType;
     public GameObject EquipModel;
 
+    [Header("내구도")]
+    public int MaxDurability;
+
     [Header("장착 스텟 보너스")]
     public float DefenseBonus;
     public float MaxHpBonus;

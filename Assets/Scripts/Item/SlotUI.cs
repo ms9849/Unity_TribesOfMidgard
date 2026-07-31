@@ -11,6 +11,8 @@ public class SlotUI : BaseUI, IPointerClickHandler, IBeginDragHandler, IDragHand
     public int Number { get; set; }
     public Image ItemImage;
     public Image EquippedIcon;
+    public Image DurabilityBG;
+    public Image DurabilityImage;
     public Text CountTextBG;
     public Text CountText;
     private Slot SlotData;
@@ -44,10 +46,24 @@ public class SlotUI : BaseUI, IPointerClickHandler, IBeginDragHandler, IDragHand
         if (SlotData != null && SlotData.Item != null)
         {
             ItemImage.sprite = SlotData.Item.ItemSprite;
-            ItemImage.color = new Color(1, 1, 1, 1);
+
+            // 내구도가 있는 장비면 내구도 게이지를 표시하고, 0이면 아이템 스프라이트를 붉게 물들입니다.
+            bool ShowDurability = SlotData.Item.IsEquipable && SlotData.Item.MaxDurability > 0;
+            bool IsBroken = ShowDurability && SlotData.CurrentDurability <= 0;
+
+            ItemImage.color = IsBroken ? new Color(1, 0.3f, 0.3f, 1) : new Color(1, 1, 1, 1);
 
             if (EquippedIcon != null)
                 EquippedIcon.enabled = SlotData.IsEquipped;
+
+            if (DurabilityImage != null)
+            {
+                DurabilityImage.enabled = ShowDurability;
+                DurabilityBG.enabled = ShowDurability;
+
+                if (ShowDurability)
+                    DurabilityImage.fillAmount = (float)SlotData.CurrentDurability / SlotData.Item.MaxDurability;
+            }
 
             // 겹칠 수 있는 아이템이면 슬롯 우하단에 수량을 표시합니다.
             bool ShowCount = SlotData.Item.IsGatherable;
@@ -75,6 +91,12 @@ public class SlotUI : BaseUI, IPointerClickHandler, IBeginDragHandler, IDragHand
 
             if (EquippedIcon != null)
                 EquippedIcon.enabled = false;
+
+            if (DurabilityBG != null)
+                DurabilityBG.enabled = false;
+
+            if (DurabilityImage != null)
+                DurabilityImage.enabled = false;
 
             if (CountTextBG != null)
                 CountTextBG.enabled = false;

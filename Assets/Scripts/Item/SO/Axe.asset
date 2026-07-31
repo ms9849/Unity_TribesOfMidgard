@@ -10,14 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 01b04c21fbe8a934299a16c3bc949d2b, type: 3}
-  m_Name: ShoesArmor
+  m_Name: Axe
   m_EditorClassIdentifier: Assembly-CSharp::ItemSO
-  ItemSprite: {fileID: 21300000, guid: b32d61835f3d8914a8435d3e14abc214, type: 3}
-  ItemName: "\uAC11\uC637"
+  ItemSprite: {fileID: 21300000, guid: 041019b24dd131646a1dc12f7099e7b5, type: 3}
+  ItemName: "\uB3C4\uB07C"
   IsGatherable: 0
   IsEquipable: 1
-  EquipType: 7
-  EquipModel: {fileID: 919132149155446097, guid: 5cd0c29e34c06a940a56faa95f81323a, type: 3}
-  DefenseBonus: 5
-  MaxHpBonus: 20
+  EquipType: 4
+  EquipModel: {fileID: 4073664286954769041, guid: 496e1ae5675e88246a48608b4067abfa, type: 3}
+  MaxDurability: 50
+  DefenseBonus: 0
+  MaxHpBonus: 0
   WeaponDamage: 0

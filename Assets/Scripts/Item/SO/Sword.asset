@@ -10,11 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 01b04c21fbe8a934299a16c3bc949d2b, type: 3}
-  m_Name: Axe
+  m_Name: Sword
   m_EditorClassIdentifier: Assembly-CSharp::ItemSO
-  ItemSprite: {fileID: 21300000, guid: 041019b24dd131646a1dc12f7099e7b5, type: 3}
-  ItemName: "\uB3C4\uB07C"
+  ItemSprite: {fileID: 21300000, guid: 69e3be9cdb58b734da37daee7176a302, type: 3}
+  ItemName: "\uAC80"
   IsGatherable: 0
   IsEquipable: 1
-  EquipType: 4
-  EquipModel: {fileID: 4073664286954769041, guid: 496e1ae5675e88246a48608b4067abfa, type: 3}
+  EquipType: 3
+  EquipModel: {fileID: 4073664286954769040, guid: 964fd4e16b2e2da4cb4694a63e5e033e, type: 3}
+  MaxDurability: 50
+  DefenseBonus: 0
+  MaxHpBonus: 0
+  WeaponDamage: 50

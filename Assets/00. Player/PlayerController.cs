@@ -10,6 +10,9 @@ public class PlayerController : MonoBehaviour
     Health PlayerHealth = null;
     Rigidbody PlayerRigidbody = null;
 
+    // 피격 시 내구도를 소모할 방어구 부위 목록.
+    static readonly EQUIP_TYPE[] ArmorTypes = { EQUIP_TYPE.HEAD, EQUIP_TYPE.CHEST, EQUIP_TYPE.PANTS, EQUIP_TYPE.SHOES, EQUIP_TYPE.GLOVE, EQUIP_TYPE.HELMET };
+
     [SerializeField] private InventoryUI PlayerInventoryUI;
     // 무기/도끼 장착 시 실제 메쉬가 붙을 손 본(Transform). Inspector에서 직접 지정합니다.
     [SerializeField] private Transform WeaponSocket;
@@ -58,6 +61,7 @@ public class PlayerController : MonoBehaviour
     {
         PlayerTransform = transform;
         PlayerAnimator = GetComponent<Animator>();
+        PlayerInventory = GetComponent<Inventory>();
         PlayerHealth = GetComponent<Health>();
         PlayerRigidbody = GetComponent<Rigidbody>();
         PlayerSpeed = 10.0f;
@@ -65,11 +69,28 @@ public class PlayerController : MonoBehaviour
     }
     void Start()
     {
+        PlayerHealth.OnDamaged += HandleDamaged;
+    }
+
+    void OnDestroy()
+    {
+        if (PlayerHealth != null)
+            PlayerHealth.OnDamaged -= HandleDamaged;
     }
 
     void Update()
     {
-        
+
+    }
+
+    // 피격 시 장착중인 방어구들의 내구도를 소모합니다.
+    void HandleDamaged(float amount, GameObject attacker)
+    {
+        foreach (EQUIP_TYPE Type in ArmorTypes)
+        {
+            if (EquippedItems.ContainsKey(Type))
+                PlayerInventory.DamageEquippedItem(Type, 5);
+        }
     }
 
     public void OnAnimatorMove()

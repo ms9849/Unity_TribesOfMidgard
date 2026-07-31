@@ -5,6 +5,7 @@ using UnityEngine;
 public class Monster : MonoBehaviour
 {
     [SerializeField] private GameObject hpUIPrefab;
+    [SerializeField] private Vector3 hpUIOffset = new Vector3(0f, 5.5f, 0f);
 
     public MonsterController monsterController { get; private set; }
     public Health monsterHealth { get; private set; }
@@ -34,7 +35,13 @@ public class Monster : MonoBehaviour
             return;
 
         GameObject HPUIInstance = Instantiate(hpUIPrefab, transform);
-        HPUIInstance.GetComponent<HPUI>()?.SetTarget(gameObject);
+        HPUI HPUIComponent = HPUIInstance.GetComponent<HPUI>();
+
+        if (HPUIComponent != null)
+        {
+            HPUIComponent.TransformOffset = hpUIOffset;
+            HPUIComponent.SetTarget(gameObject);
+        }
     }
 
     void OnDestroy()

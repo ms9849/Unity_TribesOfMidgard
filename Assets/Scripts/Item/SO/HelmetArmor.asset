@@ -10,14 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 01b04c21fbe8a934299a16c3bc949d2b, type: 3}
-  m_Name: Sword
+  m_Name: HelmetArmor
   m_EditorClassIdentifier: Assembly-CSharp::ItemSO
-  ItemSprite: {fileID: 21300000, guid: 69e3be9cdb58b734da37daee7176a302, type: 3}
-  ItemName: "\uAC80"
+  ItemSprite: {fileID: 21300000, guid: ba5b541526c7b9d4fb066f0a0504bbb4, type: 3}
+  ItemName: "\uAC11\uC637"
   IsGatherable: 0
   IsEquipable: 1
-  EquipType: 3
-  EquipModel: {fileID: 4073664286954769040, guid: 964fd4e16b2e2da4cb4694a63e5e033e, type: 3}
-  DefenseBonus: 0
-  MaxHpBonus: 0
-  WeaponDamage: 50
+  EquipType: 9
+  EquipModel: {fileID: 919132149155446097, guid: 6a7048910d8440b4f9d5b8855dfa27c1, type: 3}
+  MaxDurability: 30
+  DefenseBonus: 5
+  MaxHpBonus: 20
+  WeaponDamage: 0

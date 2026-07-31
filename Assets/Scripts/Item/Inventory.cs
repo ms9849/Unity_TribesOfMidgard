@@ -70,7 +70,7 @@ public class Inventory : MonoBehaviour
 
         ItemSO Item = TargetSlot.Item;
 
-        if (!Item.IsEquipable || Item.EquipType == EQUIP_TYPE.NONE)
+        if (!Item.IsEquipable || Item.EquipType == EQUIP_TYPE.NONE || TargetSlot.CurrentDurability <= 0)
             return;
 
         ItemSO PreviousItem = PlayerController.EquipItem(Item);
@@ -155,10 +155,11 @@ public class Inventory : MonoBehaviour
         ItemSO FromItem = FromSlot.Item;
         int FromCount = FromSlot.ItemCount;
         bool FromEquipped = FromSlot.IsEquipped;
+        int FromDurability = FromSlot.CurrentDurability;
 
         if (ToSlot.IsEmpty())
         {
-            ToSlot.SetItem(FromItem, FromCount, FromEquipped);
+            ToSlot.SetItem(FromItem, FromCount, FromEquipped, FromDurability);
             FromSlot.ClearSlot();
         }
         else
@@ -166,9 +167,25 @@ public class Inventory : MonoBehaviour
             ItemSO ToItem = ToSlot.Item;
             int ToCount = ToSlot.ItemCount;
             bool ToEquipped = ToSlot.IsEquipped;
+            int ToDurability = ToSlot.CurrentDurability;
 
-            ToSlot.SetItem(FromItem, FromCount, FromEquipped);
-            FromSlot.SetItem(ToItem, ToCount, ToEquipped);
+            ToSlot.SetItem(FromItem, FromCount, FromEquipped, FromDurability);
+            FromSlot.SetItem(ToItem, ToCount, ToEquipped, ToDurability);
+        }
+    }
+
+    // 장착중인 특정 부위의 내구도를 amount만큼 소모합니다. 0이 되면 강제로 장착 해제합니다(아이템은 인벤토리에 남습니다).
+    public void DamageEquippedItem(EQUIP_TYPE type, int amount)
+    {
+        Slot EquippedSlot = Slots.Find(S => S.IsEquipped && !S.IsEmpty() && S.Item.EquipType == type);
+
+        if (EquippedSlot == null)
+            return;
+
+        if (EquippedSlot.ReduceDurability(amount) && PlayerController != null)
+        {
+            PlayerController.UnequipItem(EquippedSlot.Item);
+            EquippedSlot.SetEquipped(false);
         }
     }
 }

@@ -48,5 +48,8 @@ public class WeaponHitbox : MonoBehaviour
 
         hitTargets.Add(Damageable);
         Damageable.TakeDamage(damage, attacker);
+
+        if (attacker != null)
+            attacker.GetComponent<Inventory>()?.DamageEquippedItem(EQUIP_TYPE.WEAPON, 5);
     }
 }

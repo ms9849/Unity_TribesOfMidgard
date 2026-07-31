@@ -10,14 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 01b04c21fbe8a934299a16c3bc949d2b, type: 3}
-  m_Name: GloveArmor
+  m_Name: ChestArmor
   m_EditorClassIdentifier: Assembly-CSharp::ItemSO
-  ItemSprite: {fileID: 21300000, guid: 72b313d0c4337c040b84bae28758e518, type: 3}
+  ItemSprite: {fileID: 21300000, guid: 7dc8db2f216c22f4ba48513e96763b40, type: 3}
   ItemName: "\uAC11\uC637"
   IsGatherable: 0
   IsEquipable: 1
-  EquipType: 8
-  EquipModel: {fileID: 919132149155446097, guid: 29df0e07c1064114db80c76fa36d3c45, type: 3}
+  EquipType: 2
+  EquipModel: {fileID: 919132149155446097, guid: 9f2a5a859d6a0cd47ab0669f318e10af, type: 3}
+  MaxDurability: 30
   DefenseBonus: 5
   MaxHpBonus: 20
   WeaponDamage: 0
