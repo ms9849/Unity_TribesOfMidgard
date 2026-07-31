@@ -26,6 +26,7 @@ public class Player : MonoBehaviour
 
     [Header("시작 지급 아이템")]
     public ItemSO StartingAxe;
+    public ItemSO StartingPickaxe;
 
     /* ***** */
     void Awake()
@@ -42,23 +43,24 @@ public class Player : MonoBehaviour
     {
         Debug.Log($"[플레이어 초기화] 인스턴스 이름: {gameObject.name} | 컨트롤러 주소: {playerController.GetHashCode()}");
 
-        GrantStartingAxe();
+        GrantStartingItem(StartingAxe);
+        GrantStartingItem(StartingPickaxe);
 
         playerHealth.OnDeath += HandleDeath;
         playerHealth.OnDamaged += HandleDamaged;
     }
 
-    // 게임 시작 시 도끼 1개를 지급하고 바로 장착시킵니다.
-    void GrantStartingAxe()
+    // 게임 시작 시 아이템 1개를 지급하고 바로 장착시킵니다.
+    void GrantStartingItem(ItemSO item)
     {
-        if (StartingAxe == null)
+        if (item == null)
             return;
 
-        playerInventory.AddItem(StartingAxe, 1);
+        playerInventory.AddItem(item, 1);
 
         for (int i = 0; i < playerInventory.Slots.Count; i++)
         {
-            if (!playerInventory.Slots[i].IsEmpty() && playerInventory.Slots[i].Item == StartingAxe)
+            if (!playerInventory.Slots[i].IsEmpty() && playerInventory.Slots[i].Item == item)
             {
                 playerInventory.EquipItemAt(i);
                 break;

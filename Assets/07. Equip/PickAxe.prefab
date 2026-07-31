@@ -46,3 +46,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Equpments
   EquipType: 5
   Mesh: {fileID: 919132149155446097, guid: 7fd9a58f8005e9849afc8a1901ff0851, type: 3}
+  MeshRotationOffset: {x: 0, y: 90, z: 0}
