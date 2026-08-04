@@ -66,6 +66,17 @@ public class SoundManager : MonoBehaviour
         SFXSource[Index].Play();
     }
 
+    public void PlaySFX(string ClipName, int Index, float Volume)
+    {
+        if (!IsValidIndex(SFXSource, Index) || !TryGetClip(ClipName, out AudioClip Clip))
+            return;
+
+        SFXSource[Index].clip = Clip;
+        SFXSource[Index].Play();
+
+        SetSFXVolume(Index, Volume);
+    }
+
     // index번 SFXSource를 정지합니다.
     public void StopSFX(int Index)
     {

@@ -24,6 +24,7 @@ public override void Enter()
         Player.playerController.isRootMotionEnabled = true;
 
         FaceMouseWorldPoint();
+        SoundManager.Instance.PlaySFX("Sword", 0, 0.1f);
 
         Player.playerAnimator.Play("SwordAttack1");
         Player.playerAnimator.Update(0f);
@@ -83,6 +84,7 @@ public override void Exit()
                     {
                         CurrentAttackCombo = ATTACK_COMBO.SECOND;
                         FaceMouseWorldPoint();
+                        SoundManager.Instance.PlaySFX("Sword", 0, 0.1f);
                         Player.playerAnimator.Play("SwordAttack2");
                         weaponHitbox?.Arm();
                         isSlashEffectSpawned = false;
@@ -115,6 +117,7 @@ public override void Exit()
                     {
                         CurrentAttackCombo = ATTACK_COMBO.THIRD;
                         FaceMouseWorldPoint();
+                        SoundManager.Instance.PlaySFX("Sword", 0, 0.1f);
                         Player.playerAnimator.Play("SwordAttack3");
                         weaponHitbox?.Arm();
                         isSlashEffectSpawned = false;
