@@ -49,6 +49,12 @@ public class CreateItemUI : BaseUI
 
         bool NewState = !IsActive;
         SetActive(NewState);
+
+        if(NewState == true)
+        {
+            SoundManager.Instance.PlaySFX("BlackSmith_Hello", 2, 0.2f);
+        }
+
         InventoryUI.Instance.SetActive(NewState);
     }
 
@@ -75,7 +81,8 @@ public class CreateItemUI : BaseUI
     // 수리 모드에서 클릭된 슬롯의 내구도를 최대치로 채웁니다.
     public void RepairSlot(Slot TargetSlot)
     {
-        if (TargetSlot == null || TargetSlot.IsEmpty() || !TargetSlot.Item.IsEquipable || TargetSlot.Item.MaxDurability <= 0)
+        if (TargetSlot == null || TargetSlot.IsEmpty() || !TargetSlot.Item.IsEquipable 
+        || TargetSlot.Item.MaxDurability <= 0 || TargetSlot.Item.MaxDurability == TargetSlot.CurrentDurability)
             return;
 
         TargetSlot.Repair();

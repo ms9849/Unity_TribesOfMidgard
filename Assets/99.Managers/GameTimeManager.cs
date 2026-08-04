@@ -45,6 +45,17 @@ public class GameTimeManager : MonoBehaviour
         IsNight = CalculateIsNight();
     }
 
+    void Start()
+    {
+        if(true == IsNight)
+        {
+            SoundManager.Instance.PlayBGM("BGM_Night", 0);   
+        }
+        else
+        {
+            SoundManager.Instance.PlayBGM("BGM_Day", 0);   
+        }
+    }
     void Update()
     {
         float CycleSeconds = DayDurationMinutes * 60f;

@@ -40,11 +40,13 @@ public class NotifyUI : MonoBehaviour
     private void HandleDayStart()
     {
         Show("새 아침이 밝았습니다!");
+        SoundManager.Instance.PlayBGM("BGM_Day", 0);  
     }
 
     private void HandleNightStart()
     {
         Show("밤이 찾아옵니다..");
+        SoundManager.Instance.PlayBGM("BGM_Night", 0);   
     }
 
     public void Show(string message)

@@ -96,6 +96,7 @@ public class Slot
             return;
 
         CurrentDurability = Item.MaxDurability;
+        SoundManager.Instance.PlaySFX("Repair", 1, 0.2f);
         OnSlotUpdated?.Invoke();
     }
 }
