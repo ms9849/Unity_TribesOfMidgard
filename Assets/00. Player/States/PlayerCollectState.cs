@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class PlayerCollectState : PlayerState
 {
+    private bool isSoundTriggered = false;
+    INTERACTION_TYPE CollectType;
     public PlayerCollectState(PlayerStateMachine FSM) : base(FSM, StateID.Collect) { }
     public override void Enter()
     {
@@ -9,16 +11,19 @@ public class PlayerCollectState : PlayerState
         {
             Player.playerAnimator.CrossFadeInFixedTime("CollectWood", 0.0f);
             Player.playerController.SetActiveHandVisual(EQUIP_TYPE.AXE);
+            CollectType = INTERACTION_TYPE.WOOD;
         }
 
         if (Player.playerController.CurrentInteractionObject.InteractionData.InteractionType == INTERACTION_TYPE.STONE)
         {
             Player.playerAnimator.CrossFadeInFixedTime("CollectStone", 0.0f);
             Player.playerController.SetActiveHandVisual(EQUIP_TYPE.PICKAXE);
+            CollectType = INTERACTION_TYPE.STONE;
         }
     }
 public override void Exit()
     {
+        isSoundTriggered = false;
         Interaction TargetObject = Player.playerController.CurrentInteractionObject;
 
         if (TargetObject != null)
@@ -44,6 +49,20 @@ public override void Exit()
 
     public override void Update()
     {
+
+        AnimatorStateInfo animState = Player.playerAnimator.GetCurrentAnimatorStateInfo(0);
+        if(animState.normalizedTime >= 0.3f && false == isSoundTriggered && INTERACTION_TYPE.WOOD == CollectType)
+        {
+            SoundManager.Instance.PlaySFX("CollectWood", 0, 0.15f);
+            isSoundTriggered = true;
+        }
+
+        if(animState.normalizedTime >= 0.25f && false == isSoundTriggered && INTERACTION_TYPE.STONE == CollectType)
+        {
+            SoundManager.Instance.PlaySFX("CollectStone", 0, 0.15f);
+            isSoundTriggered = true;
+        }
+
         // 채집 도중 트리거 범위를 벗어나는 등의 이유로 대상이 사라지면 즉시 Idle로 복귀합니다.
         if (Player.playerController.CurrentInteractionObject == null)
         {
