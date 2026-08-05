@@ -27,6 +27,7 @@ public class GameTimeManager : MonoBehaviour
 
     public int CurrentDay { get; private set; } = 1;
     public bool IsNight { get; private set; }
+    private bool IsEventTriggered = false;
 
     // 낮/밤이 전환되는 순간, 그리고 새로운 날이 시작되는 순간 호출됩니다.
     public event Action OnDayStart;
@@ -47,17 +48,23 @@ public class GameTimeManager : MonoBehaviour
 
     void Start()
     {
-        if(true == IsNight)
-        {
-            SoundManager.Instance.PlayBGM("BGM_Night", 0);   
-        }
-        else
-        {
-            SoundManager.Instance.PlayBGM("BGM_Day", 0);   
-        }
+        
     }
     void Update()
     {
+        if(false == IsEventTriggered)
+        {
+            if(true == IsNight)
+            {
+                SoundManager.Instance.PlayBGM("BGM_Night", 0);   
+            }
+            else
+            {
+                SoundManager.Instance.PlayBGM("BGM_Day", 0);   
+            }
+            IsEventTriggered = true;   
+        }
+
         float CycleSeconds = DayDurationMinutes * 60f;
 
         if (CycleSeconds <= 0f)
