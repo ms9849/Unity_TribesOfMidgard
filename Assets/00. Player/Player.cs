@@ -68,7 +68,7 @@ public class Player : MonoBehaviour
         }
     }
 
-void OnDestroy()
+    void OnDestroy()
     {
         if (playerHealth != null)
         {
