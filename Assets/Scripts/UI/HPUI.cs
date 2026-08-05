@@ -11,7 +11,7 @@ public class HPUI : BaseUI
 {
     [SerializeField] private Image fillImage;
 
-    public GameObject TargetObject { get; set; }
+    public GameObject TargetObject;
     public Health TargetHealth { get; protected set; }
     public float HPRatio { get; protected set; }
 
