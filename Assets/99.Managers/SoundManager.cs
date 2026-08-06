@@ -20,7 +20,9 @@ public class SoundManager : MonoBehaviour
             return;
         }
         Instance = this;
+        DontDestroyOnLoad(this);
     }
+    
     void Start()
     {
         SoundDict = new Dictionary<string, AudioClip>();

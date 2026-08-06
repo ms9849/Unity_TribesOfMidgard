@@ -5,10 +5,16 @@ public class TitleSceneEvent : MonoBehaviour
 {
     [SerializeField] private string MainSceneName = "MainScene";
 
+    
+    public void Start()
+    {
+        SoundManager.Instance.PlayBGM("BGM_TitleMenu", 0);
+    }
 
     public void OnClickStartButton()
     {
         SceneLoader.Instance.LoadNextScene(MainSceneName);
+        SoundManager.Instance.StopBGM(0);
     }
 
     public void OnClickExitButton()
