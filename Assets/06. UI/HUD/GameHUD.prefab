@@ -352,7 +352,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HPRatioUI
   TargetHealth: {fileID: 0}
   TargetObject: {fileID: 0}
-  TargetText: {fileID: 0}
+  TargetText: {fileID: 1010769040899179883}
 --- !u!1 &1169989513114682906
 GameObject:
   m_ObjectHideFlags: 0
