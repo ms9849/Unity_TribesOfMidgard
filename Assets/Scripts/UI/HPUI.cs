@@ -14,19 +14,24 @@ public class HPUI : BaseUI
     public GameObject TargetObject;
     public Health TargetHealth { get; protected set; }
     public float HPRatio { get; protected set; }
-
+    
+    [SerializeField]
+    bool isWorldUI = true;
     [SerializeField]
     public Vector3 TransformOffset;
     void Start()
     {
         if (TargetObject == null)
             SetTarget(GetComponentInParent<Health>()?.gameObject);
+        else
+            SetTarget(TargetObject);
     }
 
     // Update is called once per frame
     void Update()
     {
-        UpdatePosition();
+        if(true == isWorldUI)
+            UpdatePosition();
         CalcTargetHPRatio();
     }
 

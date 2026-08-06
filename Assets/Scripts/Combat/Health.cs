@@ -10,7 +10,8 @@ public class Health : MonoBehaviour, IDamageable
     public float Defense { get; private set; } = 0f;
 
     public float MaxHp => maxHp + bonusMaxHp;
-    public float CurrentHp { get; private set; }
+    [SerializeField]
+    public float CurrentHp;
     public bool IsAlive => CurrentHp > 0f;
 
     // amount, attacker
