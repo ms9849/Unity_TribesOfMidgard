@@ -28,7 +28,7 @@ public class Health : MonoBehaviour, IDamageable
         if (!IsAlive || amount <= 0f)
             return;
 
-        float MitigatedAmount = Mathf.Max(0f, amount - Defense);
+        float MitigatedAmount = Mathf.Max(0f, amount - Defense * 0.2f);
 
         CurrentHp = Mathf.Max(0f, CurrentHp - MitigatedAmount);
         OnDamaged?.Invoke(MitigatedAmount, attacker);
