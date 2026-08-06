@@ -37,7 +37,9 @@ public class SceneLoader : MonoBehaviour
                 break;
             }
         }
+
         loadingUIInstance.SetActive(false);
+        progressBarFill.enabled = false;
     }
 
     void Update()
@@ -60,9 +62,8 @@ public class SceneLoader : MonoBehaviour
 
     private IEnumerator LoadSceneRoutine(string nextSceneName)
     {
-        SetSceneObjectsActive(SceneManager.GetActiveScene(), false);
         loadingUIInstance.SetActive(true);
-        yield return null; //로딩 UI가 최소 한 프레임 렌더링되도록 대기
+        yield return new WaitForSecondsRealtime(1.0f);
 
         Op = SceneManager.LoadSceneAsync(nextSceneName);
 
@@ -73,17 +74,6 @@ public class SceneLoader : MonoBehaviour
         }
 
         Op.completed += OnLoadCompleted;
-    }
-
-    private void SetSceneObjectsActive(Scene scene, bool active)
-    {
-        foreach(GameObject root in scene.GetRootGameObjects())
-        {
-            if(root.GetComponentInChildren<Camera>(true) != null)
-                continue;
-
-            root.SetActive(active);
-        }
     }
 
     private void CalcLoadingRatio()
