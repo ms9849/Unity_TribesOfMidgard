@@ -23,7 +23,6 @@ public class Player : MonoBehaviour
     [Header("Chest SO")]
     public List<ItemSO> TestArmors;
 
-
     [Header("시작 지급 아이템")]
     public ItemSO StartingAxe;
     public ItemSO StartingPickaxe;
