@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c61ca73ddb751a54d91d98c1bdabffa1
+guid: 67392ad60bad1524698b88cfbe45c903
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
@@ -7,23 +7,13 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: MI_FireGiantHorn_001
-    second: {fileID: 2100000, guid: 5f151a94b8c6325419edb95eb7c02cb2, type: 2}
+      name: MI_1_RockLandSmall001
+    second: {fileID: 2100000, guid: 776fd3a279e48194c815c84c9f056bb0, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: MI_FireGiantSword_001
-    second: {fileID: 2100000, guid: fe8f8da7eb079944da3e3351a2e3cbac, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: MI_FireGiant_001
-    second: {fileID: 2100000, guid: 20bbe24b4485fd94dbda313df2670800, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: M_FireGiantSword_001
-    second: {fileID: 2100000, guid: e3a97d253c745ed49989c48774da2b3b, type: 2}
+      name: MI_DoglingMinion_001
+    second: {fileID: 2100000, guid: 0431b1d0b453fe041b67c5172ffc7899, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -51,11 +41,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: SK_FireGiant_001.ao|FireGiant_Attack_Feet_Left
-      takeName: SK_FireGiant_001.ao|FireGiant_Attack_Feet_Left
-      internalID: 665370247537164086
+      name: SK_DoglingMinion_001.ao|DoglingMinion_Attack_Claw01
+      takeName: SK_DoglingMinion_001.ao|DoglingMinion_Attack_Claw01
+      internalID: 2365998264763177279
       firstFrame: 0
-      lastFrame: 120
+      lastFrame: 30
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -80,11 +70,11 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: SK_FireGiant_001.ao|FireGiant_Attack_Feet_Left.001
-      takeName: SK_FireGiant_001.ao|FireGiant_Attack_Feet_Left.001
-      internalID: 2930721260136558808
+      name: SK_DoglingMinion_001.ao|DoglingMinion_Attack_Claw02
+      takeName: SK_DoglingMinion_001.ao|DoglingMinion_Attack_Claw02
+      internalID: -1885024050805216870
       firstFrame: 0
-      lastFrame: 120
+      lastFrame: 30
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -109,98 +99,11 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: SK_FireGiant_001.ao|FireGiant_Attack_Feet_Right
-      takeName: SK_FireGiant_001.ao|FireGiant_Attack_Feet_Right
-      internalID: 8087401325219837186
+      name: SK_DoglingMinion_001.ao|DoglingMinion_Attack_Claw03
+      takeName: SK_DoglingMinion_001.ao|DoglingMinion_Attack_Claw03
+      internalID: 8151018147788359789
       firstFrame: 0
-      lastFrame: 120
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: SK_FireGiant_001.ao|FireGiant_Attack_FireBreath
-      takeName: SK_FireGiant_001.ao|FireGiant_Attack_FireBreath
-      internalID: 2552315827317347534
-      firstFrame: 0
-      lastFrame: 141
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: SK_FireGiant_001.ao|FireGiant_Attack_FireBreath.001
-      takeName: SK_FireGiant_001.ao|FireGiant_Attack_FireBreath.001
-      internalID: 9195945388652813704
-      firstFrame: 0
-      lastFrame: 141
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: SK_FireGiant_001.ao|FireGiant_Attack_Ground_Sword
-      takeName: SK_FireGiant_001.ao|FireGiant_Attack_Ground_Sword
-      internalID: 3331852900572603447
-      firstFrame: 0
-      lastFrame: 120
+      lastFrame: 30
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -220,7 +123,14 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.36186254
+      - time: 0
+        functionName: NewEvent
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.49484536
         functionName: OnAttackHit
         data: 
         objectReferenceParameter: {instanceID: 0}
@@ -232,11 +142,11 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: SK_FireGiant_001.ao|FireGiant_Attack_Lava_Spit_02
-      takeName: SK_FireGiant_001.ao|FireGiant_Attack_Lava_Spit_02
-      internalID: -6207416418648405056
+      name: SK_DoglingMinion_001.ao|DoglingMinion_Attack_Claw03.001
+      takeName: SK_DoglingMinion_001.ao|DoglingMinion_Attack_Claw03.001
+      internalID: -2317073200198107516
       firstFrame: 0
-      lastFrame: 200
+      lastFrame: 30
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -261,11 +171,11 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: SK_FireGiant_001.ao|FireGiant_Attack_Vertical_Sword
-      takeName: SK_FireGiant_001.ao|FireGiant_Attack_Vertical_Sword
-      internalID: 5324802573446047935
+      name: SK_DoglingMinion_001.ao|DoglingMinion_Attack_LifeStealBite
+      takeName: SK_DoglingMinion_001.ao|DoglingMinion_Attack_LifeStealBite
+      internalID: -2546989966551973369
       firstFrame: 0
-      lastFrame: 120
+      lastFrame: 30
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -290,11 +200,11 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: SK_FireGiant_001.ao|FireGiant_Attack_Village_Loop
-      takeName: SK_FireGiant_001.ao|FireGiant_Attack_Village_Loop
-      internalID: 7056626234999188492
+      name: SK_DoglingMinion_001.ao|DoglingMinion_Attack_Projectile
+      takeName: SK_DoglingMinion_001.ao|DoglingMinion_Attack_Projectile
+      internalID: 568148035143105984
       firstFrame: 0
-      lastFrame: 398
+      lastFrame: 70
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -319,98 +229,11 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: SK_FireGiant_001.ao|FireGiant_Attack_Village_Loop.001
-      takeName: SK_FireGiant_001.ao|FireGiant_Attack_Village_Loop.001
-      internalID: -518114119831347960
+      name: SK_DoglingMinion_001.ao|DoglingMinion_Idle
+      takeName: SK_DoglingMinion_001.ao|DoglingMinion_Idle
+      internalID: -3165865873975994797
       firstFrame: 0
-      lastFrame: 398
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: SK_FireGiant_001.ao|FireGiant_Attack_Village_Return
-      takeName: SK_FireGiant_001.ao|FireGiant_Attack_Village_Return
-      internalID: 8522482202884529391
-      firstFrame: 0
-      lastFrame: 46
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: SK_FireGiant_001.ao|FireGiant_Attack_Village_Start
-      takeName: SK_FireGiant_001.ao|FireGiant_Attack_Village_Start
-      internalID: -5431587872386185769
-      firstFrame: 0
-      lastFrame: 94
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: SK_FireGiant_001.ao|FireGiant_Idle
-      takeName: SK_FireGiant_001.ao|FireGiant_Idle
-      internalID: 3888769072779749688
-      firstFrame: 0
-      lastFrame: 120
+      lastFrame: 30
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -418,7 +241,7 @@ ModelImporter:
       loop: 0
       hasAdditiveReferencePose: 0
       loopTime: 1
-      loopBlend: 1
+      loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0
@@ -435,11 +258,40 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: SK_FireGiant_001.ao|FireGiant_Walk
-      takeName: SK_FireGiant_001.ao|FireGiant_Walk
-      internalID: 7206529884641990139
+      name: SK_DoglingMinion_001.ao|DoglingMinion_Leap
+      takeName: SK_DoglingMinion_001.ao|DoglingMinion_Leap
+      internalID: 4882474832458622920
       firstFrame: 0
-      lastFrame: 100
+      lastFrame: 30
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: SK_DoglingMinion_001.ao|DoglingMinion_Run
+      takeName: SK_DoglingMinion_001.ao|DoglingMinion_Run
+      internalID: 5664321223980794100
+      firstFrame: 0
+      lastFrame: 20
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -447,7 +299,65 @@ ModelImporter:
       loop: 0
       hasAdditiveReferencePose: 0
       loopTime: 1
-      loopBlend: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: SK_DoglingMinion_001.ao|DoglingMinion_Taunt
+      takeName: SK_DoglingMinion_001.ao|DoglingMinion_Taunt
+      internalID: -6948233630215101823
+      firstFrame: 0
+      lastFrame: 30
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: SK_DoglingMinion_001.ao|DoglingMinion_Walk
+      takeName: SK_DoglingMinion_001.ao|DoglingMinion_Walk
+      internalID: 2935991934459178971
+      firstFrame: 0
+      lastFrame: 30
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0
