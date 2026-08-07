@@ -3,6 +3,7 @@ public enum MonsterStateID
     Idle,
     Move,
     Attack,
+    Projectile,
     Dead,
     End
 }

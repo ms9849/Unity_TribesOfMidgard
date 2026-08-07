@@ -10,6 +10,7 @@ public class Monster : MonoBehaviour
     public MonsterController monsterController { get; private set; }
     public Health monsterHealth { get; private set; }
     public IMonsterAttack monsterAttack { get; private set; }
+    public IMonsterProjectile monsterProjectile { get; private set; } = null;
     public Animator monsterAnimator { get; private set; }
     MonsterStateMachine monsterFSM;
 
@@ -18,6 +19,7 @@ public class Monster : MonoBehaviour
         monsterController = GetComponent<MonsterController>();
         monsterHealth = GetComponent<Health>();
         monsterAttack = GetComponent<IMonsterAttack>();
+        monsterProjectile = GetComponent<IMonsterProjectile>();
         monsterAnimator = GetComponentInChildren<Animator>();
         monsterFSM = new MonsterStateMachine(this);
     }

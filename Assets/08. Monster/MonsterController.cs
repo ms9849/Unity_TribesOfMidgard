@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class MonsterController : MonoBehaviour
 {
     [SerializeField] private float attackRange = 5f;
+    [SerializeField] private float projectileRange = 15f;
     [SerializeField] private float attackApproachMargin = 1f;
     [SerializeField] private float attackExitBuffer = 1f;
     [SerializeField] private float facingAngleThreshold = 10f;
@@ -22,6 +23,7 @@ public class MonsterController : MonoBehaviour
     public NavMeshAgent Agent => agent;
     public Transform CurrentTarget { get; private set; }
     public float AttackRange => attackRange;
+    public float ProjectileRange => projectileRange;
     public bool IsAttacking { get; private set; }
 
     void Awake()
@@ -90,6 +92,15 @@ public class MonsterController : MonoBehaviour
         return (CurrentTarget.position - transform.position).sqrMagnitude <= EffectiveRange * EffectiveRange;
     }
 
+    public bool IsInProjectileRange()
+    {
+        if (CurrentTarget == null)
+            return false;
+
+        float EffectiveRange = projectileRange;
+        return (CurrentTarget.position - transform.position).sqrMagnitude <= EffectiveRange * EffectiveRange;
+ 
+    }
     // 공격 중 이탈 판정은 attackRange보다 여유를 둬서, 타겟의 미세한 움직임(애니메이션 흔들림 등)
     // 때문에 사거리 경계에서 Attack↔Move가 반복 전환되며 공격 중에도 회전/이동하는 문제를 막는다.
     public bool IsBeyondAttackRange()

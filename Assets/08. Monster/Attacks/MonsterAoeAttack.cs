@@ -54,6 +54,8 @@ public class MonsterAoeAttack : MonoBehaviour, IMonsterAttack, IAnimationHitRece
         }
     }
 
+    public void OnProjectileHit() {}
+
     // hitVolume에 실제로 붙어있는 콜라이더 타입 그대로 물리 판정을 돌린다.
     Collider[] OverlapByHitVolume()
     {

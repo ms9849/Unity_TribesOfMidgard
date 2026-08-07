@@ -72,6 +72,9 @@ public class MonsterStateMachine : StateMachine
                 case MonsterStateID.Attack:
                     States[(int)State] = new MonsterAttackState(this);
                     break;
+                case MonsterStateID.Projectile:
+                    States[(int)State] = new MonsterProjectileState(this);
+                    break;
                 case MonsterStateID.Dead:
                     States[(int)State] = new MonsterDeadState(this);
                     break;
