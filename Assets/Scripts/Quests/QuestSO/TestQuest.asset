@@ -12,11 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d15d22e00402ade48a210133c3af2030, type: 3}
   m_Name: TestQuest
   m_EditorClassIdentifier: Assembly-CSharp::QuestData
-  questID: 
-  questName: 
-  description: 
-  objectives: []
+  questID: 0
+  questName: "\uD14C\uC2A4\uD2B8 \uD018\uC2A4\uD2B8\uC785\uB2C8\uB2E4"
+  description: "\uD018\uC2A4\uD2B8 \uC2EB\uC5B4\uC789"
+  objectives:
+  - {fileID: 11400000, guid: f4ba8b9baa9445842aeddb815813381d, type: 2}
   goldReward: 0
-  references:
-    version: 2
-    RefIds: []
+  nextQuest: {fileID: 0}

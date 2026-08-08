@@ -1,16 +1,18 @@
-// 파일명: GameEvents.cs
 using UnityEngine;
 using System;
 using System.Collections.Generic;
+using TMPro;
 
 public class QuestManager : MonoBehaviour
 {
-    // 몬스터 처치.
     public static Action<string> OnEnemyKilled;
-    // 상호작용.
     public static Action<string> OnInteractioned;
-    // 아이템 제작
     public static Action<string> OnItemCreated;
+
+    [SerializeField]
+    private TextMeshProUGUI QuestTitle;
+    [SerializeField]
+    private TextMeshProUGUI QuestDescription;
 
     public static QuestManager Instance { get; private set; }
 
@@ -18,6 +20,7 @@ public class QuestManager : MonoBehaviour
 
     [Header("게임 시작 시 자동 수락할 퀘스트 목록")]
     public List<QuestData> startingQuests;
+    
     void Awake()
     {
         if (Instance == null) 
@@ -39,29 +42,29 @@ public class QuestManager : MonoBehaviour
                 AcceptQuest(questData);
             }
         }
+
+        UpdateQuestUI();
     } 
 
     private void OnEnable()
     {
-// 선언한 모든 이벤트를 구독
         OnEnemyKilled += HandleEnemyKilled;
         OnInteractioned += HandleInteractioned;     
     }
 
     private void OnDisable()
     {
-        // 메모리 누수 방지를 위한 이벤트 구독 해제
         OnEnemyKilled -= HandleEnemyKilled;
+        OnInteractioned -= HandleInteractioned;
     }
 
-    // 퀘스트 수락 시 호출할 메서드 (예시)
     public void AcceptQuest(QuestData data)
     {
         activeQuests.Add(new Quest(data));
         Debug.Log($"퀘스트 수락됨: {data.questName}");
+        UpdateQuestUI();
     }
 
-    // 몬스터 사망 이벤트 수신 시 처리 로직
     private void HandleEnemyKilled(string killedEnemyID)
     {
         foreach (Quest quest in activeQuests)
@@ -74,24 +77,23 @@ public class QuestManager : MonoBehaviour
                 {
                     if (killObjective.enemyID == killedEnemyID)
                     {
-                        // 진척도 증가
                         quest.currentProgress[objective]++;
                         
-                        Debug.Log($"{quest.Data.questName} 진행도 업데이트: " + 
-                                  $"{quest.currentProgress[objective]} / {killObjective.requiredAmount}");
+                        Debug.Log($"{quest.Data.questName} 진행도 업데이트...");
+                        
+                        UpdateQuestUI();
 
-                        // 목표 달성 체크
                         if (killObjective.IsCompleted(quest.currentProgress[objective]))
                         {
                             Debug.Log($"목표 달성: {killObjective.objectiveDescription}");
-                            // TODO: 모든 목표가 달성되었는지 확인 후 quest.State를 Completed로 변경
+                            CheckQuestCompletion(quest);
                         }
                     }
                 }
             }
         }
     }
-    // 2. 상호작용 이벤트 처리 (새로 추가)
+
     private void HandleInteractioned(string objectID)
     {
         foreach (Quest quest in activeQuests)
@@ -104,21 +106,65 @@ public class QuestManager : MonoBehaviour
                 {
                     if (interactObjective.interactionID == objectID)
                     {
-                        // 진척도 증가
                         quest.currentProgress[objective]++;
                         
                         Debug.Log($"{quest.Data.questName} 진행도 업데이트: " + 
                                   $"{quest.currentProgress[objective]} / {interactObjective.requiredAmount}");
 
-                        // 목표 달성 체크
+                        UpdateQuestUI();
+
                         if (interactObjective.IsCompleted(quest.currentProgress[objective]))
                         {
                             Debug.Log($"목표 달성: {interactObjective.objectiveDescription}");
-                            // TODO: 모든 목표가 달성되었는지 확인 후 quest.State를 Completed로 변경
+                            CheckQuestCompletion(quest);
                         }
                     }
                 }
             }
+        }
+    }
+
+    private void CheckQuestCompletion(Quest quest)
+    {
+        bool isAllCompleted = true;
+        foreach (var objective in quest.Data.objectives)
+        {
+            if (!objective.IsCompleted(quest.currentProgress[objective]))
+            {
+                isAllCompleted = false;
+                break;
+            }
+        }
+
+        if (isAllCompleted)
+        {
+            quest.State = QuestState.Completed;
+            Debug.Log($"퀘스트 완료!: {quest.Data.questName}");
+            
+            if (quest.Data.nextQuest != null)
+            {
+                AcceptQuest(quest.Data.nextQuest);
+            }
+            else 
+            {
+                UpdateQuestUI();
+            }
+        }
+    }
+
+    public void UpdateQuestUI()
+    {
+        Quest currentQuest = activeQuests.Find(q => q.State == QuestState.Active);
+
+        if (currentQuest != null)
+        {
+            if (QuestTitle != null) QuestTitle.text = currentQuest.Data.questName;
+            if (QuestDescription != null) QuestDescription.text = currentQuest.Data.description; 
+        }
+        else
+        {
+            if (QuestTitle != null) QuestTitle.text = "퀘스트 없음";
+            if (QuestDescription != null) QuestDescription.text = "현재 진행 중인 퀘스트가 없습니다.";
         }
     }
 }
