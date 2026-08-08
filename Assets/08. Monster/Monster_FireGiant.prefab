@@ -88,10 +88,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterController
   attackRange: 3.5
+  projectileRange: 20
   attackApproachMargin: 1
   attackExitBuffer: 1
   facingAngleThreshold: 10
-  rotationSpeed: 720
+  rotationSpeed: 360
 --- !u!114 &8617998482350397601
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -52,7 +52,7 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 1
   m_Speed: 8
-  m_Acceleration: 6
+  m_Acceleration: 10
   avoidancePriority: 50
   m_AngularSpeed: 200
   m_StoppingDistance: 0
@@ -90,11 +90,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterController
   attackRange: 1
-  projectileRange: 20
+  projectileRange: 5
   attackApproachMargin: 1
   attackExitBuffer: 1
   facingAngleThreshold: 10
-  rotationSpeed: 1080
+  rotationSpeed: 360
 --- !u!114 &439296346180606757
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -108,7 +108,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Monster
   hpUIPrefab: {fileID: 347189127957486601, guid: bfbca42aa2c003e4c86e929adbb884bc, type: 3}
-  hpUIOffset: {x: 0, y: 3.5, z: 0}
+  hpUIOffset: {x: 0, y: 2.5, z: 0}
 --- !u!136 &2481410601637816577
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -201,8 +201,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterProjectileAttack
   damage: 5
-  attackCooldown: 1
-  projectile: {fileID: 0}
+  attackCooldown: 8
+  projectile: {fileID: 390166824927174068, guid: 5f37c7ef8d2bc3844a04100b60232e94, type: 3}
+  firePoint: {fileID: 7934644472367677243}
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!1001 &3075395127703926558
 PrefabInstance:
   m_ObjectHideFlags: 0
