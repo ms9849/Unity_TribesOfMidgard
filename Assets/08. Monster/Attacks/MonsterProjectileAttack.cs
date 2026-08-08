@@ -1,14 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// 즉발 판정형 몬스터 공격. Attack()에서는 애니메이션만 재생하고,
-// 실제 데미지 판정은 Animation Event로 호출되는 OnAttackHit()에서 이루어진다.
 public class MonsterProjectileAttack : MonoBehaviour, IMonsterProjectile, IAnimationHitReceiver
 {
     [SerializeField] private float damage = 5f;
     [SerializeField] private float attackCooldown = 1f;
-    //몬스터가 발사할 투사체 프리팹.
     [SerializeField] private GameObject projectile;
+
     public bool IsReady => (Time.time - lastAttackTime >= attackCooldown);
     float lastAttackTime = -999f;
     Animator animator;
@@ -29,10 +27,16 @@ public class MonsterProjectileAttack : MonoBehaviour, IMonsterProjectile, IAnima
             animator.SetTrigger("Projectile");
     }
 
-    public void OnAttackHit() {}
-    public void OnProjectileHit()
+    // 이름은 다시 OnAttackHit으로 되돌림 (릴레이 스크립트가 인식할 수 있게)
+    public void OnAttackHit()
     {
-        //여기서 Projectile 발사할 것.
-        Instantiate(projectile, gameObject.transform);
+        if (animator == null) return;
+
+        // 현재 애니메이션이 "Projectile"일 때만 투사체를 발사!
+        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+        if (stateInfo.IsName("Projectile"))
+        {
+            Instantiate(projectile, transform.position, transform.rotation);
+        }
     }
 }

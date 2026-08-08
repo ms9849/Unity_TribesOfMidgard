@@ -2,12 +2,16 @@ using UnityEngine;
 
 public class MonsterProjectileState : MonsterState
 {
+    // 애니메이션이 실제로 재생되었는지 추적하는 플래그
+    bool hasFired = false; 
+
     public MonsterProjectileState(MonsterStateMachine FSM) : base(FSM, MonsterStateID.Projectile) { }
 
     public override void Enter()
     {
         Monster.monsterController.StopMoving();
         Monster.monsterController.SetAttacking(true);
+        hasFired = false; // 상태 진입 시 플래그 초기화
     }
 
     public override void Exit()
@@ -15,16 +19,23 @@ public class MonsterProjectileState : MonsterState
         Monster.monsterController.SetAttacking(false);
     }
 
-public override void Update()
+    public override void Update()
     {
-        // 공격 애니메이션 재생 중에는 타겟 상실/사거리 이탈 판정을 무시하고
-        // 애니메이션이 끝날 때까지 Attack 상태를 유지한다.
+        // 1. 애니메이션 재생이 확인되면 플래그를 켜고, 끝날 때까지 대기
         if (IsProjectileAnimationPlaying())
+        {
+            hasFired = true; 
             return;
+        }
 
-        //MonsterStateMachine.ChangeState(MonsterStateID.Move);
+        // 2. 애니메이션이 끝났다면 (hasFired가 true인데 재생 중이 아님) Move로 복귀
+        if (hasFired)
+        {
+            MonsterStateMachine.ChangeState(MonsterStateID.Move);
+            return;
+        }
 
-
+        // --- 아래는 아직 발사 애니메이션이 시작되지 않은 찰나의 순간(1~2프레임) 처리 ---
         Transform Target = Monster.monsterController.CurrentTarget;
 
         if (Target == null)
@@ -32,13 +43,14 @@ public override void Update()
             MonsterStateMachine.ChangeState(MonsterStateID.Idle);
             return;
         }
-        // 사거리 안에 있어도 타겟을 바라보고 있지 않으면 회전만 하고 공격은 보류한다.
+
         if (!Monster.monsterController.IsFacingTarget(Target))
         {
             Monster.monsterController.RotateTowardsTarget(Target);
             return;
         }
 
+        // 3. 발사 트리거 시도 (IsReady 판정은 MonsterProjectileAttack 내부에서 알아서 걸러줌)
         Monster.monsterProjectile?.Projectile(Target);
     }
 

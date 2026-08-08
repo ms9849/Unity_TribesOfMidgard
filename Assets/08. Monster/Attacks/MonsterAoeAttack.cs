@@ -35,6 +35,9 @@ public class MonsterAoeAttack : MonoBehaviour, IMonsterAttack, IAnimationHitRece
     // Animation Event(중계: MonsterAttackAnimationRelay)에서 타격 프레임에 호출된다.
     public void OnAttackHit()
     {
+        if (animator != null && !animator.GetCurrentAnimatorStateInfo(0).IsName("Attack")) 
+            return;
+
         lastHitTime = Time.time;
 
         Collider[] Hits = OverlapByHitVolume();
@@ -53,8 +56,6 @@ public class MonsterAoeAttack : MonoBehaviour, IMonsterAttack, IAnimationHitRece
             Damageable.TakeDamage(damage, gameObject);
         }
     }
-
-    public void OnProjectileHit() {}
 
     // hitVolume에 실제로 붙어있는 콜라이더 타입 그대로 물리 판정을 돌린다.
     Collider[] OverlapByHitVolume()
