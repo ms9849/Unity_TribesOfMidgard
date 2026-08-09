@@ -56,7 +56,7 @@ public class GameTimeManager : MonoBehaviour
         {
             if(true == IsNight)
             {
-                SoundManager.Instance.PlayBGM("BGM_Night", 0);   
+                SoundManager.Instance.PlayBGM("BGM_Night_Battle", 0);   
             }
             else
             {

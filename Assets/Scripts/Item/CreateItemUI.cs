@@ -106,5 +106,6 @@ public class CreateItemUI : BaseUI
         }
 
         PlayerInventory.AddItem(recipe.ResultItem, recipe.ResultCount);
+        SoundManager.Instance.PlaySFX("CreateItem", 9, 0.3f);
     }
 }

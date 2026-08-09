@@ -46,7 +46,7 @@ public class NotifyUI : MonoBehaviour
     private void HandleNightStart()
     {
         Show("밤이 찾아옵니다..");
-        SoundManager.Instance.PlayBGM("BGM_Night", 0);   
+        SoundManager.Instance.PlayBGM("BGM_Night_Battle", 0);   
     }
 
     public void Show(string message)

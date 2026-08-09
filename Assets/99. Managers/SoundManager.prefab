@@ -52,6 +52,8 @@ MonoBehaviour:
   - {fileID: 2835433066627307132}
   - {fileID: 7140116473878558018}
   - {fileID: 872864514575788591}
+  - {fileID: 872864514575788591}
+  - {fileID: 872864514575788591}
   BGMSource:
   - {fileID: 1532963461299945962}
   AudioClips:
@@ -62,6 +64,17 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 64b55d11ccee47a41bdc0881ac0a7fb7, type: 3}
   - {fileID: 8300000, guid: a1936043102756d428218ee2d4bdc7bd, type: 3}
   - {fileID: 8300000, guid: 2925a032f6dbb5b4f91540e444a07f70, type: 3}
+  - {fileID: 8300000, guid: 6af1c36045ca11c4abde4686810d1079, type: 3}
+  - {fileID: 8300000, guid: 843f1f24581718249975fb3c8068faaa, type: 3}
+  - {fileID: 8300000, guid: b61c438dfdf8e364fbbf1a1380bb837d, type: 3}
+  - {fileID: 8300000, guid: 8f189e7cbb689dd4aa42a636abc4db4e, type: 3}
+  - {fileID: 8300000, guid: 1011a772ff635504fae5cff5ffcd13d2, type: 3}
+  - {fileID: 8300000, guid: a998a378c5e3ab2458c7c765e405791b, type: 3}
+  - {fileID: 8300000, guid: 1a0fc4384c294be4a8eac13d8617a4e9, type: 3}
+  - {fileID: 8300000, guid: 357c8aca56484fa4a84b314b5598a2f2, type: 3}
+  - {fileID: 8300000, guid: 92a3581136d384e4aa3fc499351acf4a, type: 3}
+  - {fileID: 8300000, guid: 12105785657679140a4a23a35db025b1, type: 3}
+  - {fileID: 8300000, guid: f1e4130b2d2c19d4e90fa6d8f61aeab0, type: 3}
 --- !u!82 &2835433066627307132
 AudioSource:
   m_ObjectHideFlags: 0

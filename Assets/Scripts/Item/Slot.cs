@@ -86,6 +86,16 @@ public class Slot
     public void SetEquipped(bool equipped)
     {
         IsEquipped = equipped;
+
+        if(true == equipped)
+        {
+            SoundManager.Instance.PlaySFX("Equip", 3, 0.2f);
+        }
+        else
+        {
+            SoundManager.Instance.PlaySFX("UnEquip", 3, 0.4f);
+        }
+
         OnSlotUpdated?.Invoke();
     }
 

@@ -2,11 +2,16 @@ using UnityEngine;
 
 public class PlayerWalkState : PlayerState
 {
+    private float FootstepTimer = 0.0f;
+    private const float FootstepInterval = 0.4f;
+    private const int FootstepSoundIndex = 0;
+
     public PlayerWalkState(PlayerStateMachine FSM) : base(FSM, StateID.Walk) { }
 
     public override void Enter()
     {
         Player.playerAnimator.CrossFade("Walk", 0.1f);
+        FootstepTimer = 0.0f;
     }
     public override void Exit()
     {
@@ -15,9 +20,18 @@ public class PlayerWalkState : PlayerState
     }
     public override void Update()
     {
+        FootstepTimer += Time.deltaTime;
+
+        if (FootstepTimer >= FootstepInterval)
+        {
+            SoundManager.Instance?.PlaySFX("footstep", 4, 0.15f);
+            FootstepTimer = 0.0f;
+        }
+
         if (Player.playerController.MoveInput == Vector2.zero)
         {
             PlayerStateMachine.ChangeState(StateID.Idle);
+            return;
         }
 
         if (Player.playerController.isInteractKeyPressed &&
@@ -26,11 +40,13 @@ public class PlayerWalkState : PlayerState
              (Player.playerController.CurrentInteractionObject.InteractionData.InteractionType == INTERACTION_TYPE.STONE && Player.playerController.IsPickaxeEquipped())))
         {
             PlayerStateMachine.ChangeState(StateID.Collect);
+            return;
         }
 
         if (Player.playerController.isAttackKeyPressed && Player.playerController.IsWeaponEquipped())
         {
             PlayerStateMachine.ChangeState(StateID.Attack);
+            return;
         }
     }
 

@@ -60,6 +60,7 @@ public class ProjectileBase : MonoBehaviour
             Instantiate(hitEffectPrefab, hit.point, Quaternion.identity);
         }
 
+        SoundManager.Instance.PlaySFX("projectile_explosion", 8, 0.4f);
         Destroy(gameObject);
     }
 

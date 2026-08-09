@@ -29,7 +29,23 @@ public class MonsterAoeAttack : MonoBehaviour, IMonsterAttack, IAnimationHitRece
         lastAttackTime = Time.time;
 
         if (animator != null)
+        {
             animator.SetTrigger("Attack");
+
+            Monster monster = gameObject.GetComponent<Monster>();
+
+            switch(monster.monsterName)
+            {
+                case "Monster_FireGiant":
+                    SoundManager.Instance.PlaySFX("attack_Firegiant", 6, 0.4f);
+                    break;
+                case  "Monster_Dog":
+                    SoundManager.Instance.PlaySFX("attack_dog", 5, 0.3f);
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 
     // Animation Event(중계: MonsterAttackAnimationRelay)에서 타격 프레임에 호출된다.

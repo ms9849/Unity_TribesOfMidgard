@@ -6,7 +6,7 @@ public class Monster : MonoBehaviour
 {
     [SerializeField] private GameObject hpUIPrefab;
     [SerializeField] private Vector3 hpUIOffset = new Vector3(0f, 5.5f, 0f);
-    [SerializeField] private string monsterName;
+    public string monsterName;
     public MonsterController monsterController { get; private set; }
     public Health monsterHealth { get; private set; }
     public IMonsterAttack monsterAttack { get; private set; }
