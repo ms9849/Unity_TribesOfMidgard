@@ -10,7 +10,7 @@ public class GameTimeManager : MonoBehaviour
     [Header("Cycle Settings")]
     [Tooltip("낮과 밤을 합친 하루 전체가 도는 데 걸리는 시간 (분)")]
     [Min(0.01f)]
-    public float DayDurationMinutes = 20f;
+    public float DayDurationMinutes = 8f;
 
     [Range(0f, 1f)]
     [Tooltip("현재 하루 진행도 (0 = 자정, 0.5 = 정오)")]

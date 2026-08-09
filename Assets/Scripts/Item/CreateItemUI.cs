@@ -9,7 +9,9 @@ public class CreateItemUI : BaseUI
     public RecipeSO[] Recipes;
     public GameObject RecipeCardPrefab;
     public Transform RecipeListParent;
-    public float RecipeCardSpacing = 240f;
+    public int CardsPerRow = 3;
+    public float RecipeCardSpacingX = 240f;
+    public float RecipeCardSpacingY = 140f;
 
     [Header("Repair")]
     public Button RepairButton;
@@ -31,12 +33,12 @@ public class CreateItemUI : BaseUI
         for (int i = 0; i < Recipes.Length; i++)
         {
             RecipeSO Recipe = Recipes[i];
-
             GameObject CardObject = Instantiate(RecipeCardPrefab, RecipeListParent);
-            CardObject.GetComponent<RecipeCardUI>().SetData(Recipe, () => TryCraft(Recipe));
+            CardObject.GetComponent<RecipeCardUI>().SetData(
+                Recipe,
+                () => TryCraft(Recipe)
+            );
 
-            float OffsetX = (i - (Recipes.Length - 1) / 2f) * RecipeCardSpacing;
-            CardObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(OffsetX, 0f);
         }
 
         RepairButton.onClick.AddListener(ToggleRepairMode);
@@ -106,6 +108,6 @@ public class CreateItemUI : BaseUI
         }
 
         PlayerInventory.AddItem(recipe.ResultItem, recipe.ResultCount);
-        SoundManager.Instance.PlaySFX("CreateItem", 9, 0.3f);
+        SoundManager.Instance.PlaySFX("CreateItem", 9, 0.3f); 
     }
 }
