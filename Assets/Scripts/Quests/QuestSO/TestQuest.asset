@@ -17,5 +17,6 @@ MonoBehaviour:
   description: "\uD018\uC2A4\uD2B8 \uC2EB\uC5B4\uC789"
   objectives:
   - {fileID: 11400000, guid: f4ba8b9baa9445842aeddb815813381d, type: 2}
+  - {fileID: 11400000, guid: f7c41abd47f114f4595cf43b512716f2, type: 2}
   goldReward: 0
   nextQuest: {fileID: 0}

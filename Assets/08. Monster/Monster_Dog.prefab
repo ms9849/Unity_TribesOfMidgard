@@ -109,6 +109,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Monster
   hpUIPrefab: {fileID: 347189127957486601, guid: bfbca42aa2c003e4c86e929adbb884bc, type: 3}
   hpUIOffset: {x: 0, y: 2.5, z: 0}
+  monsterName: Monster_Dog
 --- !u!136 &2481410601637816577
 CapsuleCollider:
   m_ObjectHideFlags: 0

@@ -30,6 +30,8 @@ public override void Exit()
         {
             InteractionSO Data = TargetObject.InteractionData;
 
+            QuestManager.OnInteractioned?.Invoke(Data.InteractionType);
+
             if (Data.RewardItem != null)
                 Player.playerInventory.AddItem(Data.RewardItem, Data.RewardCount);
 
@@ -53,6 +55,7 @@ public override void Exit()
         AnimatorStateInfo animState = Player.playerAnimator.GetCurrentAnimatorStateInfo(0);
         if(animState.normalizedTime >= 0.3f && false == isSoundTriggered && INTERACTION_TYPE.WOOD == CollectType)
         {
+            
             SoundManager.Instance.PlaySFX("CollectWood", 0, 0.15f);
             isSoundTriggered = true;
         }

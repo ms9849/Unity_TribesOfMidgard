@@ -6,7 +6,7 @@ using TMPro;
 public class QuestManager : MonoBehaviour
 {
     public static Action<string> OnEnemyKilled;
-    public static Action<string> OnInteractioned;
+    public static Action<INTERACTION_TYPE> OnInteractioned;
     public static Action<string> OnItemCreated;
 
     [SerializeField]
@@ -94,7 +94,7 @@ public class QuestManager : MonoBehaviour
         }
     }
 
-    private void HandleInteractioned(string objectID)
+    private void HandleInteractioned(INTERACTION_TYPE interactionType)
     {
         foreach (Quest quest in activeQuests)
         {
@@ -104,7 +104,7 @@ public class QuestManager : MonoBehaviour
             {
                 if (objective is InteractionObjective interactObjective)
                 {
-                    if (interactObjective.interactionID == objectID)
+                    if (interactObjective.interactionType == interactionType)
                     {
                         quest.currentProgress[objective]++;
                         
@@ -159,7 +159,24 @@ public class QuestManager : MonoBehaviour
         if (currentQuest != null)
         {
             if (QuestTitle != null) QuestTitle.text = currentQuest.Data.questName;
-            if (QuestDescription != null) QuestDescription.text = currentQuest.Data.description; 
+            
+            if (QuestDescription != null) 
+            {
+                // 기본 퀘스트 설명 입력
+                string fullDescription = currentQuest.Data.description + "\n\n";
+
+                // 현재 퀘스트의 모든 목표를 순회하며 진척도를 문자열에 덧붙임
+                foreach (var objective in currentQuest.Data.objectives)
+                {
+                    int currentProgress = currentQuest.currentProgress[objective];
+                    int requiredAmount = objective.requiredAmount;
+                    
+                    fullDescription += $"- {objective.objectiveDescription} : {currentProgress} / {requiredAmount}\n";
+                }
+
+                // 완성된 텍스트를 UI에 적용
+                QuestDescription.text = fullDescription;
+            }
         }
         else
         {

@@ -107,6 +107,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Monster
   hpUIPrefab: {fileID: 347189127957486601, guid: bfbca42aa2c003e4c86e929adbb884bc, type: 3}
   hpUIOffset: {x: 0, y: 6.5, z: 0}
+  monsterName: Monster_FireGiant
 --- !u!136 &4100802129380498714
 CapsuleCollider:
   m_ObjectHideFlags: 0
