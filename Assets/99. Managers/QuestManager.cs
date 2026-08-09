@@ -186,8 +186,22 @@ public class QuestManager : MonoBehaviour
         }
         else
         {
-            if (QuestTitle != null) QuestTitle.text = "퀘스트 없음";
-            if (QuestDescription != null) QuestDescription.text = "현재 진행 중인 퀘스트가 없습니다.";
+            bool IsNight = GameTimeManager.Instance.IsNight;
+
+            if (QuestTitle != null) 
+            {
+                if(true == IsNight)
+                    QuestTitle.text = "마을 지키기";
+                else if(false == IsNight)
+                    QuestTitle.text = "준비하기";
+            }
+            if (QuestDescription != null)
+            {
+                if(true == IsNight)
+                    QuestDescription.text = "적들로부터 마을을 지키세요!";
+                else if(false == IsNight)
+                    QuestDescription.text = "밤에는 적들이 몰려옵니다. 마을을 지키기 위한 준비를 하세요.";
+            }
         }
     }
 }

@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be20f5875c788ab42888ab4f482ac32c, type: 3}
+  m_Name: ShoesArmorRecipe
+  m_EditorClassIdentifier: Assembly-CSharp::RecipeSO
+  ResultItem: {fileID: 11400000, guid: 905f32eea9a5bfd4eba9f50cddef05c2, type: 2}
+  ResultCount: 1
+  Materials:
+  - Item: {fileID: 11400000, guid: df1a5c3ae72873c469cfeb9a0f25c879, type: 2}
+    Count: 2
+  - Item: {fileID: 11400000, guid: 4f78c78ee95bc1840b458c41ce3d54fc, type: 2}
+    Count: 1

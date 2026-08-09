@@ -83,9 +83,15 @@ public class GameTimeManager : MonoBehaviour
         IsNight = CalculateIsNight();
 
         if (IsNight && !WasNight)
+        {
             OnNightStart?.Invoke();
+            QuestManager.Instance.UpdateQuestUI();
+        }
         else if (!IsNight && WasNight)
+        {
             OnDayStart?.Invoke();
+            QuestManager.Instance.UpdateQuestUI();
+        }
     }
 
     private bool CalculateIsNight()

@@ -47,4 +47,4 @@ MonoBehaviour:
   QuestTitle: {fileID: 0}
   QuestDescription: {fileID: 0}
   startingQuests:
-  - {fileID: 11400000, guid: fb0dc3d1455e85846b6327b462ac5f56, type: 2}
+  - {fileID: 11400000, guid: 22f7179957c8bc34bae4853e37b75ac4, type: 2}

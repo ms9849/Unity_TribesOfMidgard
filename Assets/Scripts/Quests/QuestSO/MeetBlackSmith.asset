@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d15d22e00402ade48a210133c3af2030, type: 3}
+  m_Name: MeetBlackSmith
+  m_EditorClassIdentifier: Assembly-CSharp::QuestData
+  questID: 1
+  questName: "\uB300\uC7A5\uC7A5\uC774 \uB9CC\uB098\uAE30"
+  description: "\uB300\uC7A5\uC7A5\uC774\uB294 \uC544\uC774\uD15C \uC81C\uC791\uACFC
+    \uC218\uB9AC\uB97C \uB2F4\uB2F9\uD569\uB2C8\uB2E4. \uB300\uC7A5\uC7A5\uC774\uB97C
+    \uB9CC\uB098 F\uB85C \uC0C1\uD638\uC791\uC6A9 \uD574\uBCF4\uC138\uC694!"
+  objectives:
+  - {fileID: 11400000, guid: 5c5af749724145a4abeab1b560631267, type: 2}
+  goldReward: 0
+  nextQuest: {fileID: 11400000, guid: fde1965a479a93849bac8e819e36bbfb, type: 2}
