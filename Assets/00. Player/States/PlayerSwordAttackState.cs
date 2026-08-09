@@ -119,9 +119,8 @@ public override void Exit()
                         FaceMouseWorldPoint();
                         SoundManager.Instance.PlaySFX("Sword", 0, 0.1f);
                         Player.playerAnimator.Play("SwordAttack3");
-                        weaponHitbox?.Arm();
                         isSlashEffectSpawned = false;
-
+                        weaponHitbox?.Arm();
                         isNextAttackReserved = false;
                         isAnimationEnd = false;
                         return;
@@ -149,11 +148,11 @@ public override void Exit()
                     Player.playerAnimator.Play("SwordAttack3End");
                     isAnimationEnd = true;
                 }
-                // SwordAttack1End가 끝났을 때
+                // SwordAttack3End가 끝났을 때
                 // 후딜 50% 이상 재생된 뒤에는 이동/공격 입력이 들어오면 즉시 캔슬하고 복귀합니다.
                 else if (animState.IsName("SwordAttack3End") &&
                          (animState.normalizedTime >= 1.0f ||
-                          (animState.normalizedTime >= 0.5f &&
+                          (animState.normalizedTime >= 0.3f &&
                            (Player.playerController.isAttackKeyPressed || Player.playerController.MoveInput != Vector2.zero))))
                 {
                     PlayerStateMachine.ChangeState(StateID.Idle);

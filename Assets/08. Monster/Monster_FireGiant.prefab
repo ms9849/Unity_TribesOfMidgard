@@ -143,7 +143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9065345aa0aab59498f7c95aba4cdb29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterAoeAttack
-  damage: 20
+  damage: 10
   attackCooldown: 2
   hitVolume: {fileID: 1912095323530535423}
   targetLayer:

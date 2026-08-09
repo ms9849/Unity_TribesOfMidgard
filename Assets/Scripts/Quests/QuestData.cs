@@ -8,7 +8,6 @@ public class QuestData : ScriptableObject
     public string questName;
     [TextArea] public string description;
     
-    // 👇 서브클래스 셀렉터 및 다형성 직렬화 속성 모두 제거! 깔끔한 기본 리스트입니다.
     public List<QuestObjective> objectives = new List<QuestObjective>(); 
     
     public int goldReward;

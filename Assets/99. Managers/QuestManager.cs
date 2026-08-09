@@ -77,16 +77,19 @@ public class QuestManager : MonoBehaviour
                 {
                     if (killObjective.enemyID == killedEnemyID)
                     {
-                        quest.currentProgress[objective]++;
-                        
-                        Debug.Log($"{quest.Data.questName} 진행도 업데이트...");
-                        
-                        UpdateQuestUI();
-
-                        if (killObjective.IsCompleted(quest.currentProgress[objective]))
+                        if (quest.currentProgress[objective] < killObjective.requiredAmount)
                         {
-                            Debug.Log($"목표 달성: {killObjective.objectiveDescription}");
-                            CheckQuestCompletion(quest);
+                            quest.currentProgress[objective]++;
+                            
+                            Debug.Log($"{quest.Data.questName} 진행도 업데이트...");
+                            
+                            UpdateQuestUI();
+
+                            if (killObjective.IsCompleted(quest.currentProgress[objective]))
+                            {
+                                Debug.Log($"목표 달성: {killObjective.objectiveDescription}");
+                                CheckQuestCompletion(quest);
+                            }
                         }
                     }
                 }
@@ -106,17 +109,20 @@ public class QuestManager : MonoBehaviour
                 {
                     if (interactObjective.interactionType == interactionType)
                     {
-                        quest.currentProgress[objective]++;
-                        
-                        Debug.Log($"{quest.Data.questName} 진행도 업데이트: " + 
-                                  $"{quest.currentProgress[objective]} / {interactObjective.requiredAmount}");
-
-                        UpdateQuestUI();
-
-                        if (interactObjective.IsCompleted(quest.currentProgress[objective]))
+                        if (quest.currentProgress[objective] < interactObjective.requiredAmount)
                         {
-                            Debug.Log($"목표 달성: {interactObjective.objectiveDescription}");
-                            CheckQuestCompletion(quest);
+                            quest.currentProgress[objective]++;
+                            
+                            Debug.Log($"{quest.Data.questName} 진행도 업데이트: " + 
+                                      $"{quest.currentProgress[objective]} / {interactObjective.requiredAmount}");
+
+                            UpdateQuestUI();
+
+                            if (interactObjective.IsCompleted(quest.currentProgress[objective]))
+                            {
+                                Debug.Log($"목표 달성: {interactObjective.objectiveDescription}");
+                                CheckQuestCompletion(quest);
+                            }
                         }
                     }
                 }

@@ -64,8 +64,8 @@ public class PlayerController : MonoBehaviour
         PlayerInventory = GetComponent<Inventory>();
         PlayerHealth = GetComponent<Health>();
         PlayerRigidbody = GetComponent<Rigidbody>();
-        PlayerSpeed = 10.0f;
-        RotationSpeed = 10.0f;
+        PlayerSpeed = 6.0f;
+        RotationSpeed = 5.0f;
     }
     void Start()
     {
