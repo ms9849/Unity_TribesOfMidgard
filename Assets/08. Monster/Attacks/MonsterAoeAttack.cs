@@ -34,13 +34,13 @@ public class MonsterAoeAttack : MonoBehaviour, IMonsterAttack, IAnimationHitRece
 
             Monster monster = gameObject.GetComponent<Monster>();
 
-            switch(monster.monsterName)
+            switch(monster.monsterName.Trim())
             {
                 case "Monster_FireGiant":
                     SoundManager.Instance.PlaySFX("attack_Firegiant", 6, 0.4f);
                     break;
                 case  "Monster_Dog":
-                    SoundManager.Instance.PlaySFX("attack_dog", 5, 0.3f);
+                    SoundManager.Instance.PlaySFX("attack_dog", 11, 0.3f);
                     break;
                 default:
                     break;

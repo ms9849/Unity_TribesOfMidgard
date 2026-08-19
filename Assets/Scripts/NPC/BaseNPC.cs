@@ -8,30 +8,34 @@ public abstract class BaseNPC : MonoBehaviour
 
     private PlayerInput InteractingPlayer;
     protected Inventory InteractingInventory;
+    bool isInteractbale = false;
+
+    void Start()
+    {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+
+        InteractingPlayer = player.GetComponent<PlayerInput>();
+        InteractingInventory = player.GetComponent<Inventory>();
+    }
 
     protected virtual void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Player"))
             return;
 
-        InteractingPlayer = other.GetComponent<PlayerInput>();
-        InteractingInventory = other.GetComponent<Inventory>();
         NPCInteractionUI.Instance.Show(transform, NPCName);
+        isInteractbale = true;
     }
 
     protected virtual void OnTriggerExit(Collider other)
     {
-        if (!other.CompareTag("Player"))
-            return;
-
-        InteractingPlayer = null;
-        InteractingInventory = null;
         NPCInteractionUI.Instance.Hide();
+        isInteractbale = false;
     }
 
     protected virtual void Update()
     {
-        if (InteractingPlayer != null && InteractingPlayer.actions["Player/Interact"].WasPressedThisFrame())
+        if (true == isInteractbale && InteractingPlayer.actions["Player/Interact"].WasPressedThisFrame())
         {
             Interact();
         }

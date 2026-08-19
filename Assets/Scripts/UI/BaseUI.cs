@@ -4,7 +4,7 @@ using UnityEngine;
 public abstract class BaseUI : MonoBehaviour
 {
     [Header("Base UI")]
-    [SerializeField] private bool isActive = true;
+    [SerializeField] protected bool isActive = true;
 
     public bool IsActive => isActive;
 
@@ -19,7 +19,7 @@ public abstract class BaseUI : MonoBehaviour
         ApplyActiveState();
     }
 
-    public void ToggleActive()
+    public virtual void ToggleActive()
     {
         SetActive(!isActive);
     }

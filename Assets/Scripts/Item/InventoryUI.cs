@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.InputSystem;
 // rtk 테스트용 주석
 
 public class InventoryUI : BaseUI
@@ -22,7 +22,9 @@ public class InventoryUI : BaseUI
     public Vector2 Spacing = new Vector2(10f, 10f);
     [Tooltip("SlotParent 좌상단 기준 시작 오프셋")]
     public Vector2 StartOffset = new Vector2(0f, 0f);
-
+    private PlayerInput InteractingPlayer;
+    private GameObject player;
+    private PlayerController playerController;
 
 protected override void Awake()
     {
@@ -47,6 +49,10 @@ protected override void Awake()
 
             SlotUIs[i].UpdateSlotUI();
         }
+
+        player = GameObject.FindGameObjectWithTag("Player");
+        playerController = player.GetComponent<PlayerController>();
+        InteractingPlayer = player.GetComponent<PlayerInput>();
     }
 
     /// 인덱스(Index)를 기준으로 Columns 개수만큼 한 줄에 슬롯을 배치합니다.
@@ -72,10 +78,24 @@ protected override void Awake()
         SlotRect.sizeDelta = CellSize;
     }
 
+    public override void ToggleActive()
+    {
+        base.ToggleActive();
 
+        if (isActive)
+        {
+
+            playerController.ClearAttackInput();
+            // 인벤토리 열림        
+            InteractingPlayer.actions["Player/Attack"].Disable();
+        }
+        else
+        {
+            InteractingPlayer.actions["Player/Attack"].Enable();
+        }
+    }
     //이후 이벤트에 따라 UpdateSlotUI 따로 호출.
     void Update()
     {
-        int a = 10;
     }
 }

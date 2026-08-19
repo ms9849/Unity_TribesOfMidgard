@@ -18,7 +18,7 @@ MonoBehaviour:
   IsEquipable: 1
   EquipType: 8
   EquipModel: {fileID: 919132149155446097, guid: 29df0e07c1064114db80c76fa36d3c45, type: 3}
-  MaxDurability: 100
+  MaxDurability: 300
   DefenseBonus: 2
   MaxHpBonus: 20
   WeaponDamage: 0

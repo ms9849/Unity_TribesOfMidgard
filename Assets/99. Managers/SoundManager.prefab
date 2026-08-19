@@ -60,6 +60,7 @@ MonoBehaviour:
   - {fileID: 872864514575788591}
   - {fileID: 872864514575788591}
   - {fileID: 872864514575788591}
+  - {fileID: 872864514575788591}
   BGMSource:
   - {fileID: 1532963461299945962}
   AudioClips:

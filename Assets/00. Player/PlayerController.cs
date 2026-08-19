@@ -64,8 +64,8 @@ public class PlayerController : MonoBehaviour
         PlayerInventory = GetComponent<Inventory>();
         PlayerHealth = GetComponent<Health>();
         PlayerRigidbody = GetComponent<Rigidbody>();
-        PlayerSpeed = 6.0f;
-        RotationSpeed = 5.0f;
+        PlayerSpeed = 5.0f;
+        RotationSpeed = 4.5f;
     }
     void Start()
     {
@@ -109,8 +109,13 @@ public class PlayerController : MonoBehaviour
 
     public void OnAttack(InputAction.CallbackContext context)
     {
-        if (context.phase == InputActionPhase.Started && !PlayerInventoryUI.IsActive)
-            isAttackKeyPressed = true;
+        if (context.phase != InputActionPhase.Started)
+            return;
+
+        if (PlayerInventoryUI.IsActive)
+            return;
+
+        isAttackKeyPressed = true;
     }
 
     // 마우스 스크린 좌표를 플레이어 발밑 높이의 수평면에 투영해 월드 좌표를 구합니다.
@@ -446,6 +451,11 @@ public ItemSO EquipItem(ItemSO item)
             default:
                 return null;
         }
+    }
+
+    public void ClearAttackInput()
+    {
+        isAttackKeyPressed = false;
     }
 }
 

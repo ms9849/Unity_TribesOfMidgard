@@ -16,19 +16,22 @@ public class SoundManager : MonoBehaviour
     {
         if (Instance != null && Instance != this)
         {
-            Destroy(gameObject);
-            return;
+            // 씬 전환 시 이후 씬의 SoundManager가 더 완전한 AudioClips 목록을 가질 수 있도록 교체합니다.
+            Destroy(Instance.gameObject);
         }
+
         Instance = this;
-        DontDestroyOnLoad(this);
+        DontDestroyOnLoad(gameObject);
+        BuildSoundDict();
     }
-    
-    void Start()
+
+    private void BuildSoundDict()
     {
         SoundDict = new Dictionary<string, AudioClip>();
         foreach (AudioClip Clip in AudioClips)
         {
-            SoundDict[Clip.name] = Clip;
+            if (Clip != null)
+                SoundDict[Clip.name] = Clip;
         }
     }
 
